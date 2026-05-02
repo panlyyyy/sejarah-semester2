@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Sejarah Kemerdekaan RI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel CDN for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const quizData = [
+          {
+            id: 1,
+            q: `Perundingan Linggarjati menyepakati pengakuan de facto Belanda atas wilayah Republik Indonesia yang hanya mencakup Jawa, Sumatera, dan Madura. Keputusan ini memicu perdebatan sengit di dalam negeri hingga muncul golongan yang menentang Sutan Syahrir. Berdasarkan analisis situasi politik saat itu, mengapa kesepakatan wilayah tersebut memicu penolakan keras dari sebagian tokoh nasional?`,
+            o: {
+              A: `Kesepakatan tersebut memaksa Indonesia untuk membayar hutang perang pemerintah Hindia Belanda.`,
+              B: `Wilayah di luar Jawa, Sumatera, dan Madura akan langsung diberikan kepada tentara Sekutu.`,
+              C: `Pengakuan wilayah yang terbatas dianggap mencederai makna Proklamasi yang mengklaim seluruh wilayah bekas Hindia Belanda.`,
+              D: `Belanda diberikan hak istimewa untuk mengeksploitasi sumber daya alam di pulau-pulau selain ketiga wilayah tersebut.`,
+              E: `Indonesia harus mengubah sistem pemerintahannya menjadi parlementer agar diakui wilayahnya.`
+            },
+            a: `C`,
+            p: `Proklamasi Kemerdekaan 17 Agustus 1945 mengklaim seluruh wilayah bekas jajahan Hindia Belanda sebagai wilayah RI. Pengakuan de facto yang hanya mencakup Jawa, Sumatera, dan Madura dianggap sebagai kemunduran diplomasi dan mencederai cita-cita kemerdekaan yang utuh.`
+          },
+          {
+            id: 2,
+            q: `Salah satu poin krusial di Linggarjati adalah pembentukan negara federasi (Republik Indonesia Serikat) dan Uni Indonesia-Belanda. Jika dianalisis dari kacamata politik kolonial, apa tujuan tersembunyi Belanda mengusulkan bentuk negara serikat (federal)?`,
+            o: {
+              A: `Mempercepat proses modernisasi sistem pemerintahan di daerah-daerah terpencil.`,
+              B: `Memecah belah persatuan bangsa Indonesia agar lebih mudah dikendalikan oleh Belanda.`,
+              C: `Meringankan beban ekonomi Belanda dalam membangun kembali infrastruktur yang hancur.`,
+              D: `Memberikan kebebasan mutlak kepada kerajaan-kerajaan lokal untuk memerintah sendiri.`,
+              E: `Mengakomodasi saran dari PBB agar tidak terjadi sentralisasi kekuasaan di Jawa.`
+            },
+            a: `B`,
+            p: `Strategi negara federal (BFO) digunakan Belanda sebagai taktik devide et impera (pecah belah). Dengan membentuk negara-negara boneka di luar wilayah RI, Belanda bertujuan memperlemah posisi tawar RI dan menjaga dominasinya di nusantara.`
+          },
+          {
+            id: 3,
+            q: `Perjanjian Renville menghasilkan Garis Demarkasi Van Mook yang berdampak pada keharusan mundurnya TNI dari kantong-kantong gerilya di wilayah yang diklaim Belanda. Dampak strategis yang paling merugikan bagi militer Indonesia dari kesepakatan ini adalah…`,
+            o: {
+              A: `TNI kehilangan dukungan senjata dari negara-negara simpatisan di luar negeri.`,
+              B: `Wilayah kedaulatan RI menyusut drastis dan pertahanan militer menjadi terpusat di wilayah yang sangat sempit.`,
+              C: `Banyak tentara Indonesia yang akhirnya memilih bergabung dengan militer Belanda (KNIL).`,
+              D: `Terjadinya pemberontakan internal di tubuh TNI karena menolak berdamai dengan Sekutu.`,
+              E: `Indonesia kehilangan hak untuk memproduksi senjata di wilayah Jawa Barat dan Jawa Timur.`
+            },
+            a: `B`,
+            p: `Garis Van Mook membuat wilayah RI semakin menyusut karena Belanda menetapkan garis sepihak. Konsekuensinya, kantong pertahanan TNI di wilayah Belanda harus dikosongkan (Hijrah), membuat pertahanan terpusat di wilayah Yogyakarta yang sempit.`
+          },
+          {
+            id: 4,
+            q: `Jatuhnya Kabinet Amir Sjarifuddin tidak lepas dari penandatanganan Perjanjian Renville. Publik dan partai politik menarik dukungan mereka terhadap kabinetnya. Mengapa penandatanganan perjanjian tersebut berakibat fatal bagi karir politik Amir Sjarifuddin?`,
+            o: {
+              A: `Ia dianggap terlalu berpihak pada tuntutan Amerika Serikat daripada kepentingan rakyat.`,
+              B: `Kabinetnya gagal mendapatkan bantuan finansial pasca perjanjian ditandatangani.`,
+              C: `Perjanjian tersebut mengharuskan pembubaran sebagian besar partai politik di Indonesia.`,
+              D: `Ia dinilai gagal mempertahankan kedaulatan negara karena menyetujui wilayah RI yang semakin sempit.`,
+              E: `Amir Sjarifuddin menolak untuk berkoordinasi dengan Jenderal Sudirman sebelum perundingan.`
+            },
+            a: `D`,
+            p: `Perjanjian Renville sangat merugikan RI secara teritorial. Amir Sjarifuddin sebagai pemimpin delegasi dianggap bertanggung jawab atas kekalahan diplomasi ini.`
+          },
+          {
+            id: 5,
+            q: `Setelah Agresi Militer Belanda I, PBB membentuk Komisi Jasa Baik (Komisi Tiga Negara) yang terdiri dari Australia, Belgia, dan Amerika Serikat. Indonesia memilih Australia sebagai wakilnya. Alasan analitis mengapa Indonesia menaruh kepercayaan penuh pada Australia adalah...`,
+            o: {
+              A: `Australia adalah negara persemakmuran Inggris yang memiliki kekuatan militer terbesar di Asia Pasifik.`,
+              B: `Australia memiliki sejarah pernah dijajah oleh Belanda dan bersimpati pada Indonesia.`,
+              C: `Adanya simpati dari rakyat dan buruh pelabuhan di Australia (peristiwa Black Armada) yang memboikot kapal-kapal Belanda.`,
+              D: `Australia berjanji akan memberikan bantuan dana militer apabila Indonesia bersedia berunding.`,
+              E: `Secara geografis, Australia memiliki hak intervensi langsung atas kebijakan politik di Asia Tenggara.`
+            },
+            a: `C`,
+            p: `Indonesia memilih Australia karena simpati nyata yang ditunjukkan rakyat Australia, seperti aksi pemogokan pekerja pelabuhan (Black Armada).`
+          },
+          {
+            id: 6,
+            q: `Peran KTN dalam menyelesaikan konflik Indonesia-Belanda sering kali dianggap terbatas karena mereka hanya berstatus sebagai "Komisi Jasa Baik" (Good Offices Committee). Keterbatasan wewenang ini dibuktikan oleh...`,
+            o: {
+              A: `KTN dapat menjatuhkan sanksi ekonomi langsung kepada Belanda, tetapi tidak berani melakukannya.`,
+              B: `KTN hanya bisa memberikan saran dan memfasilitasi dialog, namun tidak bisa memaksa kedua pihak mematuhi keputusannya.`,
+              C: `KTN lebih banyak membela kepentingan Belanda karena Amerika Serikat mendukung penjajahan.`,
+              D: `KTN dibubarkan oleh PBB sebelum Perundingan Renville selesai diselenggarakan.`,
+              E: `Hak veto KTN sering digagalkan oleh negara-negara Eropa yang berpihak pada Belanda.`
+            },
+            a: `B`,
+            p: `Sebagai Good Offices Committee, KTN tidak memiliki kekuasaan eksekutif atau kekuatan pemaksa (enforcement).`
+          },
+          {
+            id: 7,
+            q: `Perjanjian Roem-Royen disepakati setelah Agresi Militer Belanda II yang menuai kecaman dunia internasional. Salah satu butir penting dalam perjanjian ini adalah kesediaan Belanda mengembalikan pemerintahan RI ke Yogyakarta. Dari segi diplomasi, apa makna pengembalian pemerintah RI ke Yogyakarta bagi posisi Indonesia di mata dunia?`,
+            o: {
+              A: `Menunjukkan bahwa Belanda telah kehabisan dana untuk melanjutkan agresi militer.`,
+              B: `Mengembalikan status hukum (legal standing) dan eksistensi pemerintah RI sebagai pihak yang setara sebelum KMB diselenggarakan.`,
+              C: `Menghientikan seluruh perlawanan gerilya yang dipimpin oleh Jenderal Sudirman secara permanen.`,
+              D: `Membuktikan bahwa tentara Belanda tidak mampu menembus benteng pertahanan keraton Yogyakarta.`,
+              E: `Memberi kesempatan bagi para pemimpin RI untuk mengumpulkan senjata baru dari selundupan internasional.`
+            },
+            a: `B`,
+            p: `Pengembalian pemimpin RI ke Yogyakarta memulihkan eksistensi dan status hukum pemerintah Republik, menjadikannya prasyarat mutlak sebelum negosiasi final (KMB) dilakukan.`
+          },
+          {
+            id: 8,
+            q: `Dalam Perundingan Roem-Royen, Mohammad Roem menjamin bahwa pemerintah RI akan memerintahkan penghentian perang gerilya. Kebijakan diplomasi ini sempat memicu ketegangan dengan pihak militer, khususnya Jenderal Sudirman. Mengapa Jenderal Sudirman awalnya bersikap skeptis terhadap hasil perundingan tersebut?`,
+            o: {
+              A: `Beliau menginginkan posisi sebagai delegasi utama dalam setiap perundingan dengan Belanda.`,
+              B: `Jenderal Sudirman merasa diplomasi hanya akan memberikan Belanda waktu untuk memperkuat pasukannya kembali.`,
+              C: `TNI sudah berhasil memukul mundur pasukan Belanda hingga ke Batavia, sehingga diplomasi tidak diperlukan.`,
+              D: `Beliau khawatir para diplomat akan menyerahkan wilayah Sumatera dan Jawa seluruhnya kepada sekutu.`,
+              E: `Jenderal Sudirman tidak mengakui wewenang PBB dalam mencampuri urusan dalam negeri Indonesia.`
+            },
+            a: `B`,
+            p: `Sudirman skeptis karena menganggap gencatan senjata hanyalah taktik Belanda untuk mengulur waktu dan melakukan konsolidasi militer.`
+          },
+          {
+            id: 9,
+            q: `Salah satu poin paling kontroversial dari Konferensi Meja Bundar (KMB) adalah penundaan penyelesaian status Irian Barat. Mengapa Belanda bersikeras mempertahankan Irian Barat (Papua) dan tidak menyerahkannya bersamaan dengan wilayah Hindia Belanda lainnya?`,
+            o: {
+              A: `Irian Barat telah diklaim oleh negara-negara Sekutu sebagai pangkalan militer internasional.`,
+              B: `Penduduk Irian Barat telah menyatakan keinginan untuk bergabung dengan Australia.`,
+              C: `Belanda ingin menjaga Irian Barat sebagai pos pertahanan terakhir sekaligus tempat evakuasi warga Indo-Belanda.`,
+              D: `Irian Barat tidak pernah menjadi bagian dari administrasi Hindia Belanda di masa lalu.`,
+              E: `Indonesia sendiri yang meminta penundaan karena belum memiliki biaya untuk membangun wilayah tersebut.`
+            },
+            a: `C`,
+            p: `Belanda bersikeras mempertahankan Irian Barat demi gengsi kolonial dan direncanakan sebagai wilayah penempatan (evakuasi) orang-orang Indo-Belanda.`
+          },
+          {
+            id: 10,
+            q: `Sebagai ganti pengakuan kedaulatan, Indonesia dalam KMB terpaksa menerima beban utang warisan pemerintah Hindia Belanda sejak tahun 1942. Jika dianalisis secara kritis, tujuan ekonomi politik Belanda membebankan utang tersebut kepada RIS adalah…`,
+            o: {
+              A: `Agar ekonomi Indonesia yang baru merdeka tetap bergantung dan terikat pada struktur ekonomi Belanda.`,
+              B: `Sebagai bentuk hukuman dari PBB karena Indonesia melakukan perlawanan bersenjata.`,
+              C: `Untuk membiayai pemulangan tentara Sekutu dan Jepang ke negara masing-masing.`,
+              D: `Karena Belanda telah berinvestasi besar-besaran di bidang pendidikan bagi rakyat pribumi.`,
+              E: `Agar Indonesia tidak bisa mendaftar sebagai anggota aktif PBB.`
+            },
+            a: `A`,
+            p: `Beban utang tersebut merupakan strategi neokolonialisme agar Indonesia tidak bisa langsung mandiri dan tetap bergantung pada Belanda.`
+          },
+          {
+            id: 11,
+            q: `Pertempuran 5 Hari di Semarang dipicu oleh gugurnya dr. Kariadi. Reaksi kemarahan pemuda Semarang sangat masif karena dr. Kariadi sedang menjalankan tugas kemanusiaan untuk mengecek tandon air Candi yang diisukan…`,
+            o: {
+              A: `Dihancurkan oleh tentara Sekutu untuk memutuskan pasokan air.`,
+              B: `Diracuni oleh tentara Jepang yang menolak menyerahkan senjatanya.`,
+              C: `Dijadikan pangkalan rahasia NICA untuk menyelundupkan senjata.`,
+              D: `Dibakar oleh sisa-sisa pasukan Belanda yang kabur dari kamp tawanan.`,
+              E: `Dikuasai oleh pemberontak lokal yang menentang pemerintahan Republik.`
+            },
+            a: `B`,
+            p: `Isu bahwa tandon air minum diracuni oleh Jepang membuat dr. Kariadi pergi untuk memeriksanya dan dibunuh, yang menjadi stimulus kemarahan pemuda.`
+          },
+          {
+            id: 12,
+            q: `Pertempuran di Semarang ini melibatkan pasukan pemuda Indonesia melawan batalion Kidobutai dari Jepang. Analisis mengapa pasukan Jepang yang sebenarnya sudah menyerah kepada Sekutu justru berani bertempur sengit melawan pemuda Indonesia?`,
+            o: {
+              A: `Mereka ingin kembali menduduki Pulau Jawa sebelum Sekutu mendarat.`,
+              B: `Jepang ditujaskan oleh Sekutu untuk menjaga status quo dan menolak penyerahan senjata kepada pihak Indonesia.`,
+              C: `Pasukan Jepang diperintahkan langsung oleh Kaisar untuk membumihanguskan kota-kota pelabuhan.`,
+              D: `NICA menjanjikan kekebalan hukum bagi tentara Jepang jika mereka menghabisi pejuang Indonesia.`,
+              E: `Pemuda Semarang memaksa tentara Jepang untuk menjadi barisan pelopor penyerangan terhadap Sekutu.`
+            },
+            a: `B`,
+            p: `Pasca menyerah, Jepang diberi tanggung jawab menjaga status quo hingga Sekutu tiba, sehingga mereka mencegah pemuda Indonesia melucuti senjata.`
+          },
+          {
+            id: 13,
+            q: `Pertempuran Medan Area memicu Sekutu memasang papan batas bertuliskan "Fixed Boundaries Medan Area". Secara politis, pemasangan papan pembatas ini merupakan bentuk...`,
+            o: {
+              A: `Pengakuan Sekutu atas wilayah kedaulatan Indonesia di Sumatera Utara.`,
+              B: `Taktik provokasi untuk membatasi ruang gerak pejuang republik dan mengklaim kendali sepihak atas kota Medan.`,
+              C: `Upaya Sekutu melindungi warga sipil Indonesia dari ancaman sisa-sisa pasukan Jepang.`,
+              D: `Tanda batas untuk mendistribusikan bantuan makanan secara merata kepada rakyat.`,
+              E: `Kesepakatan damai antara TKR dengan Jenderal TED Kelly.`
+            },
+            a: `B`,
+            p: `Sekutu memasang papan tersebut secara sepihak untuk membatasi pergerakan pejuang Republik dan menegaskan otoritas kekuasaan mereka.`
+          },
+          {
+            id: 14,
+            q: `Dalam Pertempuran Medan Area, lencana Merah Putih yang dikenakan oleh pemuda Indonesia direbut dan diinjak-injak oleh seorang penghuni hotel. Mengapa insiden kecil terkait "lencana" ini bisa memicu pertempuran bersenjata yang masif?`,
+            o: {
+              A: `Lencana tersebut terbuat dari emas milik kesultanan setempat.`,
+              B: `Lencana itu adalah penanda bagi utusan diplomasi internasional.`,
+              C: `Pemuda Indonesia sangat sensitif karena lencana merupakan simbol harga diri, kedaulatan, dan identitas kemerdekaan yang direndahkan.`,
+              D: `Penghuni hotel tersebut merupakan seorang perwira tinggi militer Belanda.`,
+              E: `Penginjakan lencana tersebut merupakan sinyal dimulainya Agresi Militer Belanda.`
+            },
+            a: `C`,
+            p: `Simbol-simbol negara seperti bendera dan lencana sangat sakral. Penghinaan terhadap simbol ini sama dengan menghina kemerdekaan.`
+          },
+          {
+            id: 15,
+            q: `Strategi "Supit Urang" yang diterapkan oleh Kolonel Sudirman menjadi kunci kemenangan TKR di Palagan Ambarawa. Prinsip utama dari strategi tersebut adalah...`,
+            o: {
+              A: `Melakukan serangan frontal secara terus-menerus hingga musuh kehabisan peluru.`,
+              B: `Memblokade jalur laut sehingga bantuan musuh tidak bisa berlabuh.`,
+              C: `Pengepungan dari dua sisi (sayap) untuk memutus rantai komunikasi dan suplai musuh di tengah.`,
+              D: `Menggunakan taktik bumi hangus di seluruh desa yang dilewati musuh.`,
+              E: `Menyusup ke markas musuh dengan seragam tentara Sekutu.`
+            },
+            a: `C`,
+            p: `Supit Urang adalah taktik pengepungan ganda dari dua sisi (seperti capit udang) yang membuat musuh terkurung rapat.`
+          },
+          {
+            id: 16,
+            q: `Pertempuran Ambarawa meletus ketika pihak Sekutu dan NICA…`,
+            o: {
+              A: `Mengingkari janji dengan mempersenjatai mantan tawanan perang Eropa tersebut.`,
+              B: `Menyerang asrama tentara TKR yang sedang melakukan latihan militer.`,
+              C: `Memaksa Gubernur Jawa Tengah untuk menyerahkan kekuasaannya.`,
+              D: `Membunuh utusan perundingan Indonesia, Brigjen A.W.S. Mallaby.`,
+              E: `Menjatuhkan bom dari udara ke wilayah permukiman warga sipil.`
+            },
+            a: `A`,
+            p: `Kesepakatan awal adalah Sekutu hanya mengurus tawanan. Namun NICA mempersenjatai mantan tawanan militer Belanda (KNIL) yang baru dibebaskan.`
+          },
+          {
+            id: 17,
+            q: `Dalam pertempuran Puputan Margarana di Bali, strategi Puputan yang dipilih oleh pasukan Ciung Wanara memiliki makna filosofis yang menunjukkan…`,
+            o: {
+              A: `Taktik gerilya panjang yang menguras logistik musuh tanpa pertempuran terbuka.`,
+              B: `Semangat pantang menyerah untuk bertempur habis-habisan sampai titik darah penghabisan demi kehormatan.`,
+              C: `Keputusan mundur teratur ke pegunungan untuk mencari bantuan pasukan tambahan.`,
+              D: `Pengorbanan warga sipil untuk melindungi prajurit yang sedang mundur.`,
+              E: `Perundingan damai yang dilakukan setelah pertempuran mengalami jalan buntu.`
+            },
+            a: `B`,
+            p: `Puputan berarti perang habis-habisan (sampai mati) yang menunjukkan integritas dan penolakan takluk pada kolonialisme.`
+          },
+          {
+            id: 18,
+            q: `Penolakan I Gusti Ngurah Rai terhadap pembentukan Negara Indonesia Timur (NIT) mencerminkan…`,
+            o: {
+              A: `Keinginan rakyat Bali untuk mendirikan negara merdeka sendiri terpisah dari Jawa.`,
+              B: `Kepatuhan mutlak terhadap isi Perjanjian Linggarjati.`,
+              C: `Kesetiaan yang teguh terhadap konsep Negara Kesatuan Republik Indonesia (NKRI) dan menolak politik pecah belah Belanda.`,
+              D: `Ketidaksukaan terhadap tokoh-tokoh lokal Bali yang ditunjuk menjadi gubernur.`,
+              E: `Harapan akan intervensi kekuatan militer Jepang.`
+            },
+            a: `C`,
+            p: ``
+          },
+          {
+            id: 19,
+            q: `Penolakan terhadap ultimatum Jenderal Mansergh memicu pertempuran 10 November. Alasan strategis sekaligus psikologis rakyat Surabaya menolak ultimatum tersebut adalah...`,
+            o: {
+              A: `Mereka meyakini akan segera mendapat bantuan militer besar-besaran dari Uni Soviet.`,
+              B: `Menyerahkan senjata dianggap sebagai simbol menyerahnya kedaulatan dan harga diri bangsa yang merdeka.`,
+              C: `Pemuda Surabaya sudah memiliki persenjataan nuklir peninggalan Jepang.`,
+              D: `Pemerintah pusat di Jakarta secara resmi menginstruksikan perang terbuka.`,
+              E: `Pemuda Surabaya berencana memancing kemarahan PBB.`
+            },
+            a: `B`,
+            p: `Bagi pejuang, mematuhi ultimatum berarti melepaskan kemerdekaan yang telah diraih.`
+          },
+          {
+            id: 20,
+            q: `Resolusi Jihad yang dikeluarkan oleh KH Hasyim Asy'ari pada 22 Oktober 1945 memiliki dampak yang sangat signifikan, yaitu...`,
+            o: {
+              A: `Mengubah konflik politik-militer menjadi perang suci (jihad) mempertahankan tanah air, yang membangkitkan militansi rakyat secara luar biasa.`,
+              B: `Mewajibkan seluruh santri di Jawa Timur untuk bergabung ke dalam tentara sekutu.`,
+              C: `Meminta bantuan negara-negara Timur Tengah.`,
+              D: `Meredam emosi pemuda agar tidak terjadi pertumpahan darah.`,
+              E: `Menyatakan bahwa pihak kemerdekaan Indonesia harus bernegosiasi secara Islami.`
+            },
+            a: `A`,
+            p: `Resolusi Jihad meleburkan semangat nasionalisme dan religiusitas, menciptakan militansi luar biasa dari kaum santri dan rakyat.`
+          },
+          {
+            id: 21,
+            q: `Strategi "Bumi Hangus" dalam peristiwa Bandung Lautan Api diambil karena alasan paling rasional saat itu, yaitu...`,
+            o: {
+              A: `Ingin memusnahkan dokumen-dokumen rahasia proklamasi di Bandung.`,
+              B: `Untuk mencegah fasilitas fisik, gedung militer, dan infrastruktur kota dimanfaatkan sebagai markas strategis oleh Sekutu/NICA.`,
+              C: `Taktik tersebut merupakan instruksi langsung dari pasukan Jepang.`,
+              D: `Pembakaran dilakukan secara tidak sengaja akibat serangan udara dari Sekutu.`,
+              E: `Menjadikan alasan bagi PBB untuk menginvestigasi kejahatan perang Sekutu.`
+            },
+            a: `B`,
+            p: `Untuk mencegah fasilitas fisik, gedung militer, dan infrastruktur kota dimanfaatkan sebagai markas strategis oleh Sekutu/NICA.`
+          },
+          {
+            id: 22,
+            q: `Perbedaan pandangan antara pemerintah pusat (Syahrir) dan militer (Nasution) dalam peristiwa Bandung Lautan Api menunjukkan bahwa...`,
+            o: {
+              A: `Militer Indonesia di daerah sering membangkang dan ingin melakukan kudeta.`,
+              B: `Ada dinamika dilematis antara perjuangan jalur diplomasi yang kompromistis dan militansi militer yang menolak menyerahkan wilayah begitu saja.`,
+              C: `Syahrir telah membuat kesepakatan rahasia untuk menyerahkan kekuasaan kepada Belanda.`,
+              D: `Kolonel A.H Nasution tidak mengakui kedaulatan pemerintahan RI.`,
+              E: `Keputusan diplomasi di tingkat pusat selalu merugikan pergerakan rakyat bersenjata.`
+            },
+            a: `B`,
+            p: `Strategi bumi hangus menjadi "jalan tengah"; kota ditinggalkan (memenuhi instruksi pusat) tapi dihancurkan terlebih dahulu (memuaskan militansi taktis).`
+          },
+          {
+            id: 23,
+            q: `Keberhasilan menguasai ibukota selama "hanya 6 jam" bernilai sangat krusial karena...`,
+            o: {
+              A: `Mampu menghancurkan lebih dari 50% kekuatan tempur militer Belanda.`,
+              B: `Memberikan waktu bagi para pimpinan nasional untuk melarikan diri.`,
+              C: `Mematahkan propaganda Belanda di PBB yang mengklaim bahwa Republik Indonesia dan TNI sudah hancur.`,
+              D: `Memaksa Jenderal Sudirman untuk menghentikan perang gerilya.`,
+              E: `Mendapatkan simpati dan bantuan senjata langsung dari Uni Soviet.`
+            },
+            a: `C`,
+            p: `Serangan ini menjadi bukti tak terbantahkan bahwa TNI masih ada, yang berujung pada tekanan internasional bagi Belanda.`
+          },
+          {
+            id: 24,
+            q: `Peran Sultan Hamengkubuwono IX dalam Serangan Umum 1 Maret sangat strategis karena...`,
+            o: {
+              A: `Beliau menjadi penyumbang persenjataan tercanggih.`,
+              B: `Sultan memiliki koneksi langsung dengan Ratu Belanda.`,
+              C: `Selain diyakini sebagai penggagas ide serangan, kedudukannya yang dihormati Belanda melindungi komunikasi dan logistik para gerilyawan di keraton.`,
+              D: `Beliau mengerahkan pasukan pengawal keraton di garis depan.`,
+              E: `Sultan bertugas menangkap panglima tentara Belanda.`
+            },
+            a: `C`,
+            p: `Sri Sultan HB IX memfasilitasi komunikasi, merencanakan ide dasar serangan, dan memberikan dukungan logistik krusial dari dalam keraton yang kebal penggeledahan Belanda.`
+          },
+          {
+            id: 25,
+            q: `Salah satu alasan Perundingan Linggariati dilaksanakan di daerah Kuningan, Jawa Barat adalah karena daerah tersebut dianggap netral. Mengapa aspek netralitas lokasi sangat krusial dalam perundingan awal antara Indonesia dan Belanda?`,
+            o: {
+              A: `Agar Perserikatan Bangsa-Bangsa (PBB) dapat memantau jalannya perundingan secara langsung.`,
+              B: `Untuk menghindari intimidasi, unjuk kekuatan militer, dan tekanan psikologis dari kedua belah pihak yang sedang bersitegang di kota besar seperti Jakarta.`,
+              C: `Karena Belanda merasa takut akan diserang oleh sisa-sisa pasukan Jepang di ibukota.`,
+              D: `Linggarjati memiliki fasilitas komunikasi internasional terbaik di masa itu.`,
+              E: `Atas instruksi langsung dari Lord Killearn yang ingin berlibur di daerah pegunungan.`
+            },
+            a: `B`,
+            p: `Perundingan di kota besar yang sarat akan militer (seperti Jakarta yang diduduki Sekutu/NICA) rawan akan tekanan militer dan gesekan bersenjata. Linggarjati dipilih karena lokasinya yang netral, aman, dan jauh dari konsentrasi militer, sehingga negosiator dapat berunding tanpa tekanan.`
+          },
+          {
+            id: 26,
+            q: `Pasca disepakatinya Perundingan Linggarjati, Belanda justru sering melakukan penafsiran sepihak yang berujung pada Agresi Militer Belanda I (Juli 1947). Analisis motif utama (ekonomi-politik) Belanda melakukan Agresi Militer tersebut meskipun telah terikat perjanjian adalah…`,
+            o: {
+              A: `Ingin menghancurkan basis ideologi komunis yang mulai tumbuh di Indonesia.`,
+              B: `Kebutuhan mendesak untuk menguasai daerah-daerah perkebunan subur dan sumber daya alam demi memulihkan perekonomian Belanda pasca Perang Dunia II.`,
+              C: `Adanya desakan dari PBB agar Belanda segera menyelesaikan konflik melalui operasi militer terukur.`,
+              D: `Merasa terancam oleh kekuatan angkatan laut Indonesia yang semakin modern.`,
+              E: `Ingin menyelamatkan warga sipil Belanda yang masih ditawan di kamp-kamp pedalaman.`
+            },
+            a: `B`,
+            p: `Tujuan utama Agresi Militer I (Operatie Product) adalah motif ekonomi. Belanda sangat membutuhkan suntikan dana untuk membangun negerinya yang hancur akibat PD II, sehingga mereka menargetkan wilayah perkebunan, pelabuhan, dan pertambangan milik RI.`
+          },
+          {
+            id: 27,
+            q: `Di atas geladak kapal USS Renville, Indonesia berada dalam posisi tawar diplomasi yang lemah pasca Agresi Militer I. Delegasi RI akhirnya terpaksa menyetujui pembentukan Negara Indonesia Serikat (NIS). Jika ditinjau dari strategi diplomasi, mengapa para tokoh RI bersedia menyetujui bentuk negara federal tersebut saat itu?`,
+            o: {
+              A: `Karena para pemimpin RI sudah kehilangan kepercayaan pada taktik gerilya Jenderal Sudirman.`,
+              B: `Merupakan taktik mengulur waktu (buying time) untuk menarik simpati PBB dan memberikan kesempatan TNI menyusun kembali kekuatannya.`,
+              C: `Adanya janji bantuan militer penuh dari Amerika Serikat jika Indonesia mau mengubah sistem ketatanegaraan.`,
+              D: `Pemerintah RI kekurangan dana untuk membiayai administrasi negara berbentuk kesatuan.`,
+              E: `Rakyat di berbagai daerah secara sukarela menuntut perubahan bentuk negara menjadi serikat.`
+            },
+            a: `B`,
+            p: `Menerima syarat Renville adalah keputusan pahit demi menghindari kehancuran total RI oleh militer Belanda. Langkah diplomasi ini dipakai untuk mengamankan pengakuan internasional, mengulur waktu, dan menata ulang barisan pertahanan Republik.`
+          },
+          {
+            id: 28,
+            q: `Perjanjian Renville membawa dampak luar biasa bagi konstelasi politik internal, salah satunya adalah munculnya pemberontakan DI/TII di Jawa Barat oleh S.M. Kartosuwiryo. Bagaimana korelasi analitis antara Perjanjian Renville dengan meletusnya pemberontakan tersebut?`,
+            o: {
+              A: `Kartosuwiryo menganggap pemerintah pusat telah menyerah dengan ditariknya Divisi Siliwangi ke Yogyakarta, sehingga ia mengisi "kekosongan kekuasaan" di Jawa Barat untuk menolak Belanda.`,
+              B: `Perjanjian Renville mewajibkan seluruh laskar Islam di Jawa Barat untuk menyerahkan senjata kepada NICA.`,
+              C: `Pemerintah pusat membatalkan otonomi khusus untuk Jawa Barat sebagai syarat mutlak dari Perjanjian Renville.`,
+              D: `Belanda menjanjikan dana besar bagi Kartosuwiryo jika ia mau mendirikan Negara Islam.`,
+              E: `Divisi Siliwangi diperintahkan oleh kabinet Amir Sjarifuddin untuk menumpas kelompok keagamaan sebelum hijrah.`
+            },
+            a: `A`,
+            p: `Perjanjian Renville mengharuskan wilayah yang diklaim Belanda (termasuk Jabar) dikosongkan oleh militer RI. Hijrahnya Siliwangi dianggap oleh Kartosuwiryo sebagai bukti kelemahan pemerintah RI. Ia menolak hijrah, tetap di Jabar memerangi Belanda, lalu memproklamasikan Negara Islam Indonesia (NII).`
+          },
+          {
+            id: 29,
+            q: `Meskipun KTN memfasilitasi Perjanjian Renville, lembaga ini tidak mampu mencegah Belanda melancarkan Agresi Militer II ke Yogyakarta. Kelemahan mendasar dari KTN sebagai instrumen penyelesaian konflik internasional adalah…`,
+            o: {
+              A: `KTN dipimpin oleh diplomat Inggris yang diam-diam memasok persenjataan ke militer Belanda.`,
+              B: `KTN berstatus "Komisi Jasa Baik" yang tidak memiliki wewenang eksekutorial atau kekuatan menjatuhkan sanksi jika ada yang melanggar perjanjian.`,
+              C: `Anggota KTN menolak untuk masuk ke wilayah pedalaman Indonesia karena alasan keamanan pribadi.`,
+              D: `KTN secara resmi menuntut Indonesia untuk mengganti dasar ideologinya sebelum berunding lebih jauh.`,
+              E: `KTN hanya bisa beroperasi secara legal jika disetujui langsung oleh Ratu Belanda.`
+            },
+            a: `B`,
+            p: `KTN (Good Offices Committee) hanyalah fasilitator perdamaian. Ketika Belanda melanggar garis demarkasi dan melakukan Agresi Militer II, KTN tidak berdaya karena tidak dibekali hak untuk menjatuhkan sanksi militer maupun ekonomi.`
+          },
+          {
+            id: 30,
+            q: `Di dalam KTN, penunjukan negara anggota dilakukan oleh pihak yang berkonflik. Belanda menunjuk Belgia, Indonesia menunjuk Australia, dan AS disepakati sebagai pihak penengah. Secara politis, Belgia dipilih oleh Belanda karena…`,
+            o: {
+              A: `Belgia berjanji akan memberi pinjaman utang perang kepada pemerintah kolonial Belanda.`,
+              B: `Secara historis dan politik di Eropa, Belgia memiliki kedekatan pandangan kolonial dan simpati kepentingan dengan Belanda.`,
+              C: `Belgia memiliki angkatan laut terkuat yang mampu memblokade perairan Hindia Belanda.`,
+              D: `Belgia merupakan satu-satunya anggota tetap Dewan Keamanan PBB yang menentang kemerdekaan Indonesia.`,
+              E: `Belgia menawarkan wilayahnya sebagai tempat pengungsian para tentara NICA.`
+            },
+            a: `B`,
+            p: `Pemilihan Belgia sangat logis karena sebagai sesama negara Eropa Barat yang memiliki ikatan sejarah (pernah berada di wilayah geografis yang berdekatan) dan kepentingan serupa, Belgia cenderung mendukung posisi diplomatik Belanda atas wilayah koloninya.`
+          },
+          {
+            id: 31,
+            q: `Perjanjian Roem-Royen pada hakikatnya adalah perundingan pendahuluan (preliminary) demi membuka jalan menuju Konferensi Meja Bundar (KMB). Poin keberhasilan diplomasi paling fundamental bagi eksistensi Indonesia dari perundingan ini adalah…`,
+            o: {
+              A: `Penyerahan kedaulatan langsung tanpa syarat atas seluruh wilayah kepulauan Indonesia.`,
+              B: `Penarikan mundur seluruh kekuatan sekutu (Inggris) dari wilayah Jawa Timur secara permanen.`,
+              C: `Dibebaskannya Soekarno-Hatta dan dipulihkannya pemerintahan Republik Indonesia di Yogyakarta sebagai subjek hukum yang sah.`,
+              D: `Ditetapkannya ganti rugi perang dari pihak Belanda kepada rakyat yang menjadi korban agresi.`,
+              E: `Dibubarkannya Negara Indonesia Timur (NIT) secara resmi oleh Van Mook.`
+            },
+            a: `C`,
+            p: `Pasca Agresi Militer II, pimpinan RI ditawan. Perjanjian Roem-Royen berhasil memaksa Belanda membebaskan para pemimpin dan mengembalikan status pemerintah RI ke Yogyakarta, sehingga Indonesia bisa maju ke KMB sebagai pemerintahan yang sah dan diakui.`
+          },
+          {
+            id: 32,
+            q: `Dalam perundingan tersebut, delegasi Indonesia Mr. Moh. Roem bersikap sangat pragmatis dan menghindari tuntutan pengakuan kedaulatan seketika. Analisis rasional di balik strategi diplomasi Roem ini adalah…`,
+            o: {
+              A: `Ia menyadari bahwa posisi kekuatan militer milisi rakyat saat itu sudah hancur lebur tanpa sisa.`,
+              B: `Fokus utama saat itu adalah menyelamatkan institusi negara (mengembalikan RI ke Jogja) terlebih dahulu, sebagai prasyarat mutlak sebelum perundingan final.`,
+              C: `Mr. Moh Roem tidak ingin menyinggung perasaan delegasi Belanda yang mudah tersinggung.`,
+              D: `Indonesia memang berencana untuk tidak hadir dalam sidang KMB di Den Haag jika dipaksa.`,
+              E: `PBB telah menerbitkan resolusi yang melarang Indonesia merdeka sebelum tahun 1950.`
+            },
+            a: `B`,
+            p: `Roem sadar bahwa tidak mungkin mendapat pengakuan kedaulatan di Roem-Royen. Ia berfokus selangkah demi selangkah; syarat utamanya adalah pemerintah RI dipulihkan dan bisa berfungsi normal terlebih dulu, baru kemudian membahas kedaulatan final di KMB.`
+          },
+          {
+            id: 33,
+            q: `Konferensi Meja Bundar (KMB) berhasil mengakhiri konflik bersenjata, namun dengan menyisakan "pil pahit" yaitu pembentukan Republik Indonesia Serikat (RIS). Mengapa konsep RIS ini pada akhirnya berbenturan kuat dengan semangat kemerdekaan bangsa?`,
+            o: {
+              A: `RIS mengharuskan Indonesia mengubah sistem perekonomiannya menjadi kapitalis absolut.`,
+              B: `Konsep negara serikat dipandang melunturkan cita-cita Negara Kesatuan (NKRI) dan seolah mengesahkan negara-negara "boneka" buatan Belanda.`,
+              C: `RIS mewajibkan seluruh pejabat daerah untuk mahir berbahasa Belanda dalam birokrasi.`,
+              D: `Presiden RIS harus ditunjuk secara langsung oleh Parlemen Belanda di Den Haag.`,
+              E: `RIS mengizinkan militer KNIL untuk menjadi polisi di seluruh negara bagian tanpa terkecuali.`
+            },
+            a: `B`,
+            p: `Sejak Proklamasi 1945, cita-cita Indonesia adalah negara kesatuan (NKRI). RIS merupakan kompromi diplomatik yang memaksa RI berdiri sejajar dengan negara-negara buatan Van Mook (BFO), yang secara politis dirasakan mengancam persatuan nasional.`
+          },
+          {
+            id: 34,
+            q: `Salah satu resolusi rumit KMB adalah integrasi mantan prajurit KNIL (Tentara Kerajaan Hindia Belanda) ke dalam APRIS (Angkatan Perang Republik Indonesia Serikat). Dampak sosiopsikologis dan militer langsung dari peleburan paksa ini adalah…`,
+            o: {
+              A: `Menguatnya pertahanan udara Indonesia secara instan karena KNIL ahli menerbangkan pesawat.`,
+              B: `Memicu gesekan, pemberontakan (seperti APRA dan Andi Azis), akibat perbedaan ideologi, arogansi, dan rasa ketidakpercayaan antara TNI dan mantan KNIL.`,
+              C: `Menghemat APBN secara drastis karena seluruh fasilitas mantan KNIL langsung dijual oleh pemerintah.`,
+              D: `Mudahnya Indonesia memadamkan gerakan separatis di luar Pulau Jawa.`,
+              E: `Menghilangkan peran historis Jenderal Sudirman sebagai panglima tertinggi angkatan perang.`
+            },
+            a: `B`,
+            p: `Memadukan dua pasukan yang bermusuhan bertahun-tahun dalam satu wadah (APRIS) menimbulkan konflik kejiwaan. Mantan KNIL merasa superior, sementara TNI meragukan kesetiaan mereka pada Republik. Inilah akar penyebab meletusnya pemberontakan militer awal 1950-an.`
+          },
+          {
+            id: 35,
+            q: `Bentrokan berdarah dalam Pertempuran 5 Hari di Semarang dipicu oleh keengganan pasukan Kidobutai (Jepang) menyerahkan senjatanya. Mengapa Jepang, yang telah bertekuk lutut pada Sekutu, justru sangat bersikeras mempertahankan persenjataannya dari pemuda Indonesia?`,
+            o: {
+              A: `Jepang diam-diam telah membuat pakta rahasia untuk menyerahkan wilayah Jawa Tengah kepada Belanda.`,
+              B: `Pasukan Jepang terikat instruksi Sekutu untuk mempertahankan status quo dan menjaga keamanan hingga pendaratan militer Sekutu tiba.`,
+              C: `Mayor Kido merencanakan aksi kudeta untuk mendirikan negara fasis baru di Semarang.`,
+              D: `Jepang bermaksud membangun kembali basis pertahanan bawah tanah di daerah perbukitan Semarang.`,
+              E: `Jepang merasa tidak pernah ditaklukkan secara fisik oleh kekuatan militer Indonesia dalam peperangan besar.`
+            },
+            a: `B`,
+            p: `Setelah menyerah tanggal 15 Agustus 1945, Jepang mendapat perintah dari Komando Sekutu untuk mempertahankan ketertiban wilayah (status quo) dan dilarang menyerahkan senjata kepada siapapun selain Sekutu, yang berujung bentrok dengan pemuda RI yang butuh senjata.`
+          },
+          {
+            id: 36,
+            q: `Peristiwa gugurnya dr. Kariadi saat hendak mengecek tandon air di Candi (Siranda) yang diisukan diracun, memicu letupan perlawanan yang sangat masif. Kematian seorang dokter sipil ini menyulut emosi rakyat karena mencerminkan…`,
+            o: {
+              A: `Keberhasilan intelijen Jepang mengelabui pejuang Indonesia.`,
+              B: `Ketidaksiapan paramedis Indonesia di medan tempur terbuka.`,
+              C: `Arogansi membabi buta dari tentara Jepang yang membunuh tenaga medis tanpa mengindahkan nilai-nilai kemanusiaan internasional.`,
+              D: `Kesalahan taktik koordinasi dari komandan TKR wilayah Semarang.`,
+              E: `Pengorbanan sengaja untuk memancing intervensi Dewan Keamanan PBB.`
+            },
+            a: `C`,
+            p: `Di masa perang, tenaga medis (non-kombatan) seharusnya dilindungi. Tindakan Jepang yang secara kejam menembak dr. Kariadi yang sedang menjalankan tugas kemanusiaan (mencegah rakyat keracunan) dianggap sebagai tindakan biadab yang membakar semangat pemuda Semarang.`
+          },
+          {
+            id: 37,
+            q: `Tragedi di Medan Area diawali oleh insiden direbut dan diinjaknya lencana Merah Putih milik pemuda Indonesia oleh oknum mantan tawanan Eropa. Dari perspektif kesadaran nasionalisme, mengapa insiden yang terkesan "sederhana" ini meledak menjadi pertempuran kota?`,
+            o: {
+              A: `Karena lencana tersebut terbuat dari logam mulia milik keluarga kesultanan.`,
+              B: `Lencana merupakan representasi kedaulatan, pengakuan eksistensi, dan harga diri bangsa merdeka yang tak bisa ditawar jika dilecehkan.`,
+              C: `Masyarakat Medan sedang mencari momentum provokasi untuk melucuti senjata Sekutu.`,
+              D: `Penghuni hotel tersebut secara provokatif memutar lagu kebangsaan Belanda.`,
+              E: `Lencana tersebut adalah identitas diplomat khusus yang dituqaskan oleh Soekarno.`
+            },
+            a: `B`,
+            p: `Merah Putih (baik bendera maupun lencana) adalah simbol paling murni dari kemerdekaan yang baru direbut. Pelecahan terhadap simbol negara berarti merendahkan kemerdekaan itu sendiri, menyulut emosi kolektif rakyat yang masih euphoria atas kemerdekaan.`
+          },
+          {
+            id: 38,
+            q: `Pihak Sekutu di Medan memasang papan peringatan "Fixed Boundaries Medan Area" secara sepihak. Analisis implikasi politis dari pemasangan papan batas kota tersebut adalah…`,
+            o: {
+              A: `Sekutu berupaya memberikan otonomi khusus bagi pejuang sipil di wilayah pinggiran.`,
+              B: `Bentuk pengingkaran de facto atas kedaulatan RI dengan mengklaim dan membatasi wilayah yang sah sebagai zona teritorial kekuasaan Sekutu/NICA.`,
+              C: `Menjadi penanda berakhirnya pertempuran antara Indonesia dengan sisa tentara Jepang.`,
+              D: `Taktik sekutu melindungi bangunan-bangunan cigar budaya dari ancaman bumi hangus.`,
+              E: `Upaya membatasi gerak maju pasukan bantuan dari Aceh.`
+            },
+            a: `B`,
+            p: `Dengan memasang garis demarkasi secara sepihak, Sekutu/Inggris seolah bertindak sebagai penguasa yang mengatur tata ruang negara orang lain. Hal ini jelas melanggar dan menantang yurisdiksi dan kedaulatan Republik Indonesia atas wilayah Medan.`
+          },
+          {
+            id: 39,
+            q: `Kemenangan TKR (Tentara Keamanan Rakyat) di Palagan Ambarawa, yang dikomandoi oleh Kolonel Sudirman, sangat legendaris berkat taktik "Supit Urang". Keberhasilan memukul mundur militer Inggris (Sekutu) yang bersenjata modern membuktikan bahwa...`,
+            o: {
+              A: `Persenjataan militer Inggris sebenarnya sudah usang dan berkarat peninggalan Perang Dunia I.`,
+              B: `Taktik pengepungan gerilya yang cerdas dipadu dengan militansi rakyat mampu mengalahkan keunggulan teknologi militer modern asing.`,
+              C: `Angkatan Udara RI memberikan bantuan perlindungan tempur yang mematikan dari atas.`,
+              D: `Prajurit Inggris sangat rentan disuap dengan pasokan makanan dan obat-obatan.`,
+              E: `Pasukan kolonial tidak memiliki pengalaman bertempur di wilayah beriklim tropis.`
+            },
+            a: `B`,
+            p: `Taktik Supit Urang mengepung pasukan Sekutu dari dua sayap dan memutus suplai di tengah. Ini membuktikan bahwa strategi militer yang brilian dan didukung daya juang tinggi bisa mengungguli musuh yang lebih superior dalam hal persenjataan (Inggris sebagai pemenang PD II).`
+          },
+          {
+            id: 40,
+            q: `Ketegangan di Ambarawa mulai membara ketika NICA terbukti secara diam-diam mempersenjatai mantan tawanan perang Eropa (APWI). Tindakan ini memicu bentrokan karena pihak Indonesia menyadari bahwa...`,
+            o: {
+              A: `Para mantan tawanan tersebut akan diadili oleh Mahkamah Internasional terlebih dahulu.`,
+              B: `Sekutu melanggar komitmen awal yang hanya datang untuk mengevakuasi tawanan, bukan untuk membangkitkan kembali kekuatan militer kolonial.`,
+              C: `Senjata yang dibagikan tersebut adalah senjata hasil rampasan dari gudang TKR di Magelang.`,
+              D: `Mantan tawanan Belanda berencana melakukan kudeta terhadap pimpinan militer Inggris.`,
+              E: `Penduduk lokal Ambarawa akan dipaksa bergabung menjadi barisan depan (voorhoede) Belanda.`
+            },
+            a: `B`,
+            p: `Perjanjian kedatangan Sekutu murni untuk urusan kemanusiaan (mengurus tawanan perang dan melucuti Jepang). Mempersenjatai KNIL yang baru bebas jelas merupakan agenda tersembunyi NICA untuk kembali merebut kekuasaan, melanggar komitmen netralitas tersebut.`
+          },
+          {
+            id: 41,
+            q: `Keputusan Letkol I Gusti Ngurah Rai menolak perundingan damai dengan Belanda dan memilih Perang Puputan (habis-habisan) mengandung nilai filosofis perjuangan yang sangat tinggi. Nilai utama dari penolakan tersebut bagi kedaulatan bangsa adalah…`,
+            o: {
+              A: `Bukti kegemaran taktik pertempuran frontal daripada perang gerilya.`,
+              B: `Integritas mutlak pada Negara Kesatuan Republik Indonesia (NKRI) dan menolak keras tunduk pada iming-iming jabatan dalam negara boneka.`,
+              C: `Ambisi pribadi untuk menjadikan wilayah Bali sebagai wilayah independen dari kekuasaan Jawa.`,
+              D: `Adanya keraguan terhadap kemampuan lobi dari delegasi pemerintah pusat di Jakarta.`,
+              E: `Keyakinan bahwa senjata magis pasukannya mampu menangkal peluru meriam Belanda.`
+            },
+            a: `B`,
+            p: `Belanda merayu Ngurah Rai untuk tidak melawan dan membiarkan pembentukan Negara Indonesia Timur (NIT). Penolakannya yang berujung maut membuktikan keteguhan hatinya untuk setia menjaga Bali sebagai bagian tak terpisahkan dari Republik Indonesia.`
+          },
+          {
+            id: 42,
+            q: `Dalam pertempuran Margarana, Belanda dipaksa mengerahkan seluruh kekuatan militer di Bali, Lombok, bahkan mendatangkan bantuan pesawat pembom dari Makassar. Analisis dari eskalasi militer ini menunjukkan bahwa…`,
+            o: {
+              A: `Belanda sedang berlatih taktik tempur gabungan dengan pasukan sekutu lainnya.`,
+              B: `Belanda sangat frustrasi dan gentar menghadapi perlawanan militan tak kenal kompromi dari sepasukan kecil Ciung Wanara.`,
+              C: `Dewan Keamanan PBB telah memberikan mandat penuh kepada Belanda untuk membumihanguskan Bali.`,
+              D: `I Gusti Ngurah Rai telah berhasil menyandera beberapa perwira tinggi militer Belanda.`,
+              E: `Taktik gerilya puputan terbukti hanya bisa dikalahkan melalui blokade ekonomi.`
+            },
+            a: `B`,
+            p: `Pengerahan alutsista masif melawan sekelompok pasukan lokal membuktikan bahwa pertahanan pasukan Ciung Wanara sangat merepotkan. Pasukan Ngurah Rai memberikan perlawanan luar biasa sehingga militer Belanda kewalahan dan harus memakai bom udara untuk mengakhiri puputan.`
+          },
+          {
+            id: 43,
+            q: `Tewasnya Jenderal A.W.S. Mallaby dijadikan alasan oleh Inggris untuk mengeluarkan ultimatum penyerahan senjata tanpa syarat di Surabaya. Jika ditelaah dari psikologi militer, kematian Mallaby membuat Inggris bertindak reaktif dan brutal karena…`,
+            o: {
+              A: `Kematian tersebut dianggap sebagai noda besar dan penghinaan luar biasa terhadap supremasi militer Kerajaan Inggris yang berstatus pemenang Perang Dunia.`,
+              B: `Mallaby adalah calon pewaris tunggal kepemimpinan Sekutu di wilayah Asia Tenggara.`,
+              C: `Mallaby sedang membawa dokumen rahasia pembagian wilayah dari Perserikatan Bangsa-Bangsa.`,
+              D: `Inggris harus menutupi kelemahan taktik persenjataan mereka yang mulai kehabisan amunisi.`,
+              E: `Para pemuda Surabaya berniat mengirimkan jasad Mallaby ke markas NICA sebagai pesan provokasi.`
+            },
+            a: `A`,
+            p: `Inggris yang baru saja menang gemilang melawan kekuatan Fasis (Jerman-Jepang) di PD II merasa terhina ketika jenderal bintang satunya terbunuh oleh milisi pejuang sipil/lokal. Hal ini menghancurkan gengsi militer mereka, memicu balasan destruktif.`
+          },
+          {
+            id: 44,
+            q: `Perang kota 10 November di Surabaya melibatkan elemen masyarakat secara total, salah satunya akibat adanya Fatwa Resolusi Jihad dari KH. Hasyim Asy'ari (22 Oktober 1945). Peran vital resolusi tersebut dalam eskalasi pertempuran adalah...`,
+            o: {
+              A: `Mengubah Surabaya menjadi basis pembentukan negara berdasarkan hukum teokrasi Islam.`,
+              B: `Menyuntikkan pembenaran teologis yang radikal bahwa membela tanah air adalah kewajiban agama (fardhu 'ain), sehingga menumbuhkan keberanian tanpa kenal takut mati dari kalangan santri.`,
+              C: `Memaksa Komandan Sekutu untuk membuka ruang negosiasi antar tokoh agama sebelum bertempur.`,
+              D: `Meredam emosi kaum milenial agar tidak terjadi pertumpahan darah.`,
+              E: `Mewajibkan pemuda untuk membajak kapal perang musuh di pelabuhan Tanjung Perak.`
+            },
+            a: `B`,
+            p: `Nasionalisme dan agama melebur menjadi satu. Resolusi Jihad meyakinkan rakyat bahwa mati melawan penjajah berarti mati syahid. Keyakinan inilah yang menjadi motor penggerak perlawanan rakyat tanpa takut menghadapi meriam dan tank Inggris.`
+          },
+          {
+            id: 45,
+            q: `Dalam peristiwa Bandung Lautan Api, pemerintah RI pusat menginstruksikan agar militer Indonesia mundur mengosongkan kota Bandung demi kepentingan kelancaran diplomasi. Di sisi lain, Kolonel A.H. Nasution memilih membakar wilayah selatan Bandung. Strategi bumi hangus ini diambil karena pertimbangan taktis...`,
+            o: {
+              A: `Bandung dinilai tidak memiliki nilai sejarah penting bagi masa depan negara.`,
+              B: `Untuk mencegah infrastruktur perkotaan dan fasilitas militer dimanfaatkan secara utuh sebagai markas strategis yang kuat bagi Sekutu dan NICA.`,
+              C: `Menghancurkan pangkalan rahasia komunis yang berada di sekitar alun-alun Bandung.`,
+              D: `Merupakan balasan dendam karena markas TKR di wilayah utara telah dibom Sekutu.`,
+              E: `Mengakomodir permintaan warga lokal yang ingin bermigrasi besar-besaran ke desa.`
+            },
+            a: `B`,
+            p: `Daripada meninggalkan kota dalam kondisi utuh yang pasti akan memperkuat posisi militer musuh (menjadi benteng pertahanan NICA/Sekutu), membumihanguskan infrastruktur kota adalah jalan terbaik untuk melumpuhkan nilai taktis Bandung bagi penjajah.`
+          },
+          {
+            id: 46,
+            q: `Insiden perusakan gudang mesiu oleh Mohammad Toha di Dayeuhkolot merupakan salah satu fragmen paling heroik dalam peristiwa pengosongan Bandung. Aksi peledakan yang mengorbankan nyawanya sendiri ini secara militer sangat berdampak pada...`,
+            o: {
+              A: `Berakhirnya dominasi udara Sekutu karena pesawat mereka hancur.`,
+              B: `Terhambatnya gerak operasional dan suplai logistik/amunisi dalam skala besar bagi militer musuh.`,
+              C: `Menyelamatkan puluhan petinggi Republik yang disandera di dalam kompleks pergudangan tersebut.`,
+              D: `Membuktikan kepada PBB bahwa pemuda Indonesia mampu merakit bahan peledak nuklir taktis.`,
+              E: `Memancing simpati tentara bayaran dari Gurkha untuk berbalik memihak Indonesia.`
+            },
+            a: `B`,
+            p: `Menghancurkan pusat penyimpanan persenjataan (gudang amunisi) adalah taktik sabotase klasik namun mematikan, yang langsung melumpuhkan kemampuan musuh untuk melancarkan serangan jarak jauh dan peperangan berskala besar di wilayah tersebut.`
+          },
+          {
+            id: 47,
+            q: `Serangan Umum 1 Maret 1949 terhadap ibukota Yogyakarta dirancang dengan sangat matang dan disetujui Jenderal Sudirman. Tujuan strategis utama dari serangan mendadak ini bukanlah untuk mengusir Belanda secara permanen saat itu juga, melainkan untuk...`,
+            o: {
+              A: `Menguasai kembali instalasi pemancar radio penyiaran secara permanen di keraton.`,
+              B: `Menepis propaganda kebohongan Belanda di kancah internasional sekaligus membuktikan kepada United Nations Commission for Indonesia (UNCI) bahwa TNI dan negara Republik Indonesia masih eksis serta solid.`,
+              C: `Melindungi jalur evakuasi pelarian Soekarno-Hatta menuju Sumatera Tengah.`,
+              D: `Merampas pasokan senjata berat yang baru tiba dari negeri Belanda untuk memperkuat gerilya.`,
+              E: `Menyediakan alasan yang sah agar tentara Amerika Serikat mendarat dan melakukan intervensi bersenjata.`
+            },
+            a: `B`,
+            p: `Belanda berkampanye ke dunia luar bahwa RI telah tamat pasca Agresi Militer II. Serangan 1 Maret adalah "serangan politik dan psikologis". Dengan menguasai ibu kota walau sebentar, mata dunia (melalui pengamat PBB) terbuka bahwa RI dan kekuatan militernya masih utuh.`
+          },
+          {
+            id: 48,
+            q: `Taktik Serangan Umum dilaksanakan pada pagi hari (sekitar pukul 06.00 saat sirene berbunyi) dan pasukan TNI ditarik mundur kembali secara teratur setelah hanya menguasai kota selama 6 jam. Taktik "serang siang-mundur cepat" ini mengindikasikan kedisiplinan dan strategi...`,
+            o: {
+              A: `Ketidakmampuan logistik militer Indonesia untuk menyediakan ransum makan malam bagi prajurit.`,
+              B: `Memanfaatkan elemen kejutan (element of surprise) di saat psikologi musuh lengah, dan mundur tepat waktu sebelum bala bantuan besar berlapis baja Belanda dari luar kota tiba, guna meminimalisir korban.`,
+              C: `Mengikuti instruksi pembatasan jam operasional perang yang dikeluarkan langsung oleh Komite Palang Merah Internasional.`,
+              D: `Taktik yang semata-mata disesuaikan dengan jadwal jam kerja para pegawai sipil Belanda di kota.`,
+              E: `Kepanikan komando di lapangan yang gagal mempertahankan posisi setelah tengah hari.`
+            },
+            a: `B`,
+            p: `Serangan gerilya modern sangat memperhitungkan efisiensi. Menguasai kota siang bolong memberi efek psikologis luar biasa (mempermalukan musuh), dan mundur pada jam 12.00 siang adalah perhitungan rasional untuk menghindari konfrontasi dengan tank bantuan Belanda yang dipanggil dari Magelang/Solo.`
+          },
+          {
+            id: 49,
+            q: `Pertempuran 5 Hari di Semarang diperparah oleh kaburnya tawanan tentara Jepang dari Pabrik Gula Cepiring yang sedang dipindahkan ke Penjara Bulu. Jika dianalisis dari kondisi psikologis pasukan Jepang saat itu, mengapa para tawanan tersebut memilih memberontak dan bergabung dengan batalion Kidobutai di Jatingaleh?`,
+            o: {
+              A: `Mereka mendapat instruksi rahasia dari Kaisar untuk merebut kembali pulau Jawa.`,
+              B: `Mereka merasa terhina karena dilucuti oleh pemuda sipil Indonesia yang tidak memiliki pendidikan militer resmi.`,
+              C: `Adanya jaminan dari pihak Sekutu bahwa tentara Jepang akan dijadikan pemimpin pemerintahan lokal di Jawa Tengah.`,
+              D: `Mereka ingin mengamankan pasokan logistik pabrik gula untuk dibawa kembali ke Tokyo.`,
+              E: `Para tawanan takut akan diadili oleh pengadilan militer Indonesia atas kejahatan perang.`
+            },
+            a: `B`,
+            p: `Tentara Jepang (yang merasa memiliki tradisi militer Bushido yang kuat) merasa sangat gengsi dan terhina ketika senjata mereka dilucuti oleh pemuda/milisi lokal yang tidak terlatih. Ego militer inilah yang mendorong mereka memberontak dan bergabung dengan pasukan Mayor Kido untuk membalas dendam.`
+          },
+          {
+            id: 50,
+            q: `Dalam upaya menghentikan pertumpahan darah di Semarang, Gubernur Jawa Tengah, Mr. Wongsonegoro, ditangkap oleh pasukan Jepang saat mencoba melakukan perundingan damai. Tindakan Jepang menangkap seorang gubernur sipil yang datang untuk berunding menunjukkan bahwa…`,
+            o: {
+              A: `Jepang ingin menjadikan Mr. Wongsonegoro sebagai pemimpin boneka di Semarang.`,
+              B: `Pasukan Jepang di lapangan sudah kehilangan rantai komando yang rasional dan mengabaikan etika diplomasi internasional.`,
+              C: `Jepang menganggap Mr. Wongsonegoro sebagai mata-mata yang dikirim oleh NICA.`,
+              D: `Adanya instruksi dari PBB untuk mengamankan pejabat sipil dari area peperangan.`,
+              E: `Mr. Wongsonegoro menolak menyerahkan dokumen rahasia milik Sekutu.`
+            },
+            a: `B`,
+            p: `Menangkap utusan damai (apalagi seorang Gubernur yang mewakili pemerintahan sah) melanggar konvensi perang manapun. Hal ini membuktikan bahwa pasukan Jepang di Semarang saat itu bertindak secara reaktif, emosional, dan tidak lagi mematuhi aturan diplomasi maupun rantai komando yang wajar.`
+          },
+          {
+            id: 51,
+            q: `Dalam Pertempuran Medan Area, Gubernur Sumatera Teuku Mohammad Hasan menolak keras ultimatum Brigjen T.E.D. Kelly yang meminta pemuda menyerahkan senjata. Sikap penolakan ini memberikan dampak psikologis yang besar bagi perlawanan rakyat, yaitu…`,
+            o: {
+              A: `Membuat rakyat ketakutan dan memilih mengungsi ke semenanjung Malaya.`,
+              B: `Mengubah status pertempuran dari pemberontakan lokal menjadi perlawanan resmi yang direstui oleh institusi negara.`,
+              C: `Memancing intervensi militer dari angkatan laut Amerika Serikat ke perairan Sumatera.`,
+              D: `Memaksa pemuda untuk menyerang markas Jepang demi mendapatkan tambahan senjata.`,
+              E: `Menjadikan Medan sebagai ibukota sementara Republik Indonesia menggantikan Jakarta.`
+            },
+            a: `B`,
+            p: `Dukungan langsung dari seorang Gubernur (pejabat resmi negara) melegitimasi tindakan para pemuda. Perlawanan bersenjata bukan lagi dianggap sebagai aksi sporadis "pemberontak", melainkan perjuangan resmi yang didukung penuh oleh struktur pemerintahan Republik Indonesia di Sumatera.`
+          },
+          {
+            id: 52,
+            q: `Setelah terdesak dari pusat kota Medan, para pejuang tidak menyerah melainkan membentuk "Komando Resimen Laskar Rakyat Medan Area" di Tebing Tinggi. Strategi desentralisasi basis perlawanan ini membuktikan bahwa...`,
+            o: {
+              A: `Pejuang Indonesia kehabisan dana untuk menyewa gedung di pusat kota Medan.`,
+              B: `Perjuangan bersifat teritorial luwes; hilangnya satu kota tidak berarti hancurnya komando perlawanan militer.`,
+              C: `Tebing Tinggi memiliki pabrik senjata peninggalan Belanda yang belum dihancurkan.`,
+              D: `Pejuang berniat memisahkan diri dari Republik Indonesia dan mendirikan negara Sumatera.`,
+              E: `Pihak Sekutu tidak memiliki kendaraan militer untuk mengejar pejuang ke luar kota.`
+            },
+            a: `B`,
+            p: `Taktik gerilya tidak bergantung pada penguasaan satu kota secara statis. Dengan memindahkan markas ke Tebing Tinggi, pejuang menunjukkan fleksibilitas strategi perang gerilya: mundur untuk konsolidasi, mempertahankan komando, dan terus merongrong pertahanan Sekutu dari luar kota.`
+          },
+          {
+            id: 53,
+            q: `Pemasangan papan "Fixed Boundaries Medan Area" oleh Sekutu di berbagai sudut kota memicu eskalasi konflik yang drastis. Secara hukum ketatanegaraan, mengapa pemasangan papan tersebut merupakan penghinaan bagi Indonesia?`,
+            o: {
+              A: `Papan tersebut ditulis menggunakan bahasa Belanda yang tidak dimengerti warga lokal.`,
+              B: `Membuktikan bahwa Sekutu bertindak layaknya penguasa teritorial yang berhak membagi-bagi wilayah negara merdeka secara sepihak.`,
+              C: `Pemasangan papan tersebut merusak fasilitas umum yang baru saja dibangun oleh pemerintah RI.`,
+              D: `Sekutu mencantumkan ancaman hukuman mati bagi siapa saja yang melewati batas tersebut.`,
+              E: `Papan tersebut dipasang di halaman masjid dan gereja utama di kota Medan.`
+            },
+            a: `B`,
+            p: `Dengan menetapkan "batas resmi" secara sepihak, Sekutu tidak menghargai kedaulatan RI atas wilayahnya sendiri. Tindakan mengklaim wilayah administrasi suatu negara yang merdeka adalah bentuk pelanggaran kedaulatan dan pelecehan hukum tata negara.`
+          },
+          {
+            id: 54,
+            q: `Gugurnya Letkol Isdiman (komandan pasukan RI di Ambarawa) akibat serangan udara pesawat Mustang milik Sekutu justru membawa dampak balikan (boomerang effect) bagi pihak musuh. Dampak analitis dari peristiwa gugurnya Letkol Isdiman adalah…`,
+            o: {
+              A: `Pasukan TKR menyerah tanpa syarat karena kehilangan pemimpin utamanya.`,
+              B: `Menarik perhatian PBB karena Sekutu menggunakan pesawat tempur canggih untuk melawan milisi sipil.`,
+              C: `Turun gunungnya Panglima Besar Jenderal Sudirman secara langsung untuk memimpin pertempuran, yang melipatgandakan moril dan agresivitas pasukan TKR.`,
+              D: `Sekutu harus membayar ganti rugi perang kepada keluarga Letkol Isdiman.`,
+              E: `Militer Belanda (KNIL) menolak melanjutkan peperangan karena bersimpati pada Isdiman.`
+            },
+            a: `C`,
+            p: `Letkol Isdiman adalah perwira kesayangan dan tangan kanan Sudirman. Gugurnya Isdiman membuat Jenderal Sudirman turun langsung memimpin pertempuran. Kehadiran pucuk pimpinan tertinggi TKR di garis depan ini menjadi katalisator yang membakar semangat tempur pasukan hingga berhasil memenangkan pertempuran.`
+          },
+          {
+            id: 55,
+            q: `Dalam Palagan Ambarawa, militer Inggris (Sekutu) sampai harus meminta bantuan serangan udara dari Royal Air Force (RAF) untuk membombardir posisi TKR. Pengerahan angkatan udara ini membuktikan bahwa…`,
+            o: {
+              A: `TKR berhasil mencuri tank-tank milik Sekutu dan menggunakannya untuk menyerang balik.`,
+              B: `Kondisi geografis Ambarawa yang berbukit membuat pasukan infanteri Inggris terjebak dan kehabisan akal menembus kepungan TKR (Supit Urang).`,
+              C: `Inggris sedang melakukan uji coba senjata baru pasca Perang Dunia II.`,
+              D: `Cuaca buruk menghalangi pergerakan pasukan darat Sekutu dari Semarang.`,
+              E: `TKR telah menggunakan senjata gas air mata yang membahayakan pasukan infanteri Inggris.`
+            },
+            a: `B`,
+            p: `Pasukan darat Inggris benar-benar terkurung rapat oleh taktik Supit Urang. Karena infanteri dan kavaleri mereka tidak berkutik dan gagal mendobrak pertahanan TKR, komando Sekutu terpaksa memanggil bantuan dari udara (RAF) sebagai satu-satunya cara untuk memecah kepungan.`
+          },
+          {
+            id: 56,
+            q: `Sebelum pecahnya Puputan Margarana, Letkol I Gusti Ngurah Rai menulis surat balasan kepada Letkol J.B.T. Konig (perwira Belanda). Dalam suratnya, Ngurah Rai menegaskan bahwa "Bali bukanlah tempat untuk perundingan yang memecah belah". Surat ini secara esensial merepresentasikan…`,
+            o: {
+              A: `Keangkuhan militer pejuang lokal yang meremehkan kekuatan artileri Belanda.`,
+              B: `Ketegasan ideologis bahwa urusan kedaulatan adalah urusan pusat di Jakarta, dan militer di daerah tidak akan berkompromi dengan tawaran negara federal (NIT).`,
+              C: `Kesepakatan rahasia antara Ngurah Rai dan pasukan Jepang yang masih tersisa di Bali.`,
+              D: `Penolakan atas tawaran uang tebusan dari Belanda untuk membebaskan tawanan.`,
+              E: `Permintaan agar Konig menyerahkan posisinya sebagai penguasa militer di Bali timur.`
+            },
+            a: `B`,
+            p: `Ngurah Rai menyadari bahwa Belanda selalu menggunakan taktik devide et impera. Penolakannya berunding di daerah menegaskan prinsip bahwa Bali adalah kesatuan tak terpisahkan dari RI, menolak segala bentuk bujukan untuk mendirikan Negara Indonesia Timur (NIT).`
+          },
+          {
+            id: 57,
+            q: `Pemicu langsung serbuan besar-besaran Belanda ke markas Ciung Wanara di desa Margarana adalah aksi pasukan I Gusti Ngurah Rai yang melucuti persenjataan polisi NICA di Tabanan. Mengapa aksi pelucutan senjata ini sangat memukul telak gengsi Belanda?`,
+            o: {
+              A: `Senjata yang dilucuti adalah senjata nuklir taktis yang dirahasiakan.`,
+              B: `Polisi NICA di Tabanan dipimpin langsung oleh Gubernur Jenderal Van Mook.`,
+              C: `Aksi tersebut membuktikan kelemahan fatal intelijen dan pertahanan NICA di wilayah yang mereka klaim telah sepenuhnya aman dan dikuasai.`,
+              D: `Ngurah Rai menggunakan senjata tersebut untuk menembak jatuh pesawat sipil Belanda.`,
+              E: `Pelucutan senjata dilakukan oleh barisan perempuan pejuang Bali.`
+            },
+            a: `C`,
+            p: `Belanda selalu mempropagandakan bahwa Bali sudah damai dan berada di bawah kendali NICA. Aksi sukses Ciung Wanara merampas gudang senjata NICA di Tabanan secara kilat membantah klaim tersebut dan mempermalukan militer Belanda, sehingga mereka membalas dengan kekuatan penuh ke Margarana.`
+          },
+          {
+            id: 58,
+            q: `Pertempuran Puputan Margarana berakhir dengan gugurnya I Gusti Ngurah Rai beserta seluruh pasukannya (96 orang). Meskipun secara militer ini adalah sebuah kekalahan taktis karena kehilangan seluruh pasukan tempur, secara politis peristiwa ini bernilai kemenangan moral karena…`,
+            o: {
+              A: `Mengakibatkan pemerintah Belanda langsung memberikan kemerdekaan pada saat itu juga.`,
+              B: `Mematahkan klaim sepihak Belanda di PBB yang menyebut seluruh rakyat Bali mendukung penuh pendirian Negara Indonesia Timur (NIT).`,
+              C: `Menginspirasi PBB untuk membubarkan militer kerajaan Belanda.`,
+              D: `Pasukan Belanda di Bali kehilangan seluruh amunisinya dan harus pulang ke Eropa.`,
+              E: `Bali otomatis diakui sebagai provinsi otonom oleh dunia internasional.`
+            },
+            a: `B`,
+            p: `Belanda berusaha meyakinkan dunia bahwa rakyat Timur (termasuk Bali) tidak ingin bergabung dengan RI. Perlawanan sampai mati (Puputan) dari Ngurah Rai membuktikan kepada dunia internasional bahwa ada penolakan keras dan pengorbanan nyata dari rakyat Bali terhadap kolonialisme Belanda.`
+          },
+          {
+            id: 59,
+            q: `Bung Tomo memanfaatkan siaran Radio Pemberontakan untuk mengobarkan semangat rakyat Surabaya. Dari perspektif analisis komunikasi massa pada masa krisis militer, efektivitas pidato Bung Tomo terletak pada...`,
+            o: {
+              A: `Penggunaan bahasa diplomatis tingkat tinggi yang mampu menyentuh simpati negara-negara Barat.`,
+              B: `Kapasitasnya dalam menyajikan data statistik kekuatan militer Inggris untuk menakuti rakyat agar berlindung.`,
+              C: `Pemilihan retorika yang memadukan pekik takbir dan nasionalisme kerakyatan, yang memicu kebangkitan militansi bawah sadar massa.`,
+              D: `Perintah taktis yang sangat spesifik mengenai formasi barisan militer di lapangan.`,
+              E: `Kemampuannya menerjemahkan ancaman Sekutu ke dalam bahasa Jawa krama inggil.`
+            },
+            a: `C`,
+            p: `Bung Tomo bukan komandan lapangan yang memberi instruksi taktis militer. Kekuatannya adalah pada retorika agitasi-propaganda. Dengan memadukan seruan agamis (Takbir) dan gaya bahasa kerakyatan (arek-arek Suroboyo), ia menyentuh lapisan emosi terdalam rakyat untuk berani mati melawan penjajah.`
+          },
+          {
+            id: 60,
+            q: `Inggris memprediksi bahwa Surabaya dapat ditaklukkan dalam waktu 3 hari. Namun kenyataannya, pertempuran berlangsung sangat alot hingga 3 minggu. Faktor utama yang menyebabkan melesetnya prediksi intelijen militer Inggris adalah...`,
+            o: {
+              A: `Inggris tidak menyangka bahwa TKR memiliki pasokan pesawat pembom peninggalan Jepang.`,
+              B: `Munculnya struktur pertahanan komando horizontal (keterlibatan kiai, santri, laskar rakyat, dan pemuda lintas etnis) yang tidak bergantung pada satu komandan pusat.`,
+              C: `Datangnya bantuan satu divisi penuh tentara dari Uni Soviet secara diam-diam.`,
+              D: `Adanya cuaca ekstrem yang membuat meriam-meriam kapal perang Inggris tidak bisa ditembakkan.`,
+              E: `Wali kota Surabaya mengancam akan meracuni aliran sungai jika Inggris menyerang.`
+            },
+            a: `B`,
+            p: `Prediksi militer klasik mengasumsikan jika pusat komando dihancurkan, pasukan akan menyerah. Di Surabaya, perlawanan bersifat "semesta" (melibatkan seluruh lapisan masyarakat tanpa hirarki militer kaku). Saat satu pos hancur, laskar santri atau pemuda kampung di tempat lain akan otomatis mengambil alih perlawanan, membuat pembersihan kota menjadi sangat lambat.`
+          },
+          {
+            id: 61,
+            q: `Dampak dari Pertempuran Surabaya bergema hingga ke markas PBB. Peristiwa 10 November secara tidak langsung merugikan posisi diplomasi Belanda (dan Sekutu) karena...`,
+            o: {
+              A: `Inggris dituntut oleh Mahkamah Internasional atas kejahatan perang genosida.`,
+              B: `Perlawanan masif rakyat membantah kebohongan propaganda Belanda yang selama ini menyebut RI hanyalah kelompok "fasis buatan Jepang" tanpa dukungan rakyat.`,
+              C: `Indonesia berhasil menyandera seluruh diplomat Belanda di Surabaya.`,
+              D: `Amerika Serikat langsung menjatuhkan sanksi embargo ekonomi kepada Inggris.`,
+              E: `Pemerintah RI pusat di Jakarta memutuskan hubungan diplomatik dengan seluruh negara Eropa.`
+            },
+            a: `B`,
+            p: `Belanda selalu mengklaim bahwa Republik Indonesia hanyalah boneka fasis Jepang dan rakyat sebenarnya ingin Belanda kembali. Pertempuran heroik rakyat sipil Surabaya membuka mata dunia (melalui jurnalis asing yang meliput) bahwa rakyat Indonesia benar-benar mendukung kemerdekaan dan siap mati untuk itu.`
+          },
+          {
+            id: 62,
+            q: `Eksodus (pengungsian) massal sekitar 200.000 penduduk Bandung yang meninggalkan kota yang terbakar menuju pegunungan di selatan bukanlah sekadar pelarian karena panik, melainkan sebuah bentuk "perlawanan pasif". Makna dari perlawanan pasif ini adalah...`,
+            o: {
+              A: `Menunggu bala bantuan dari pasukan Siliwangi untuk menyerang balik.`,
+              B: `Menolak memberikan fasilitas sipil, tenaga kerja, dan dukungan ekonomi logistik apa pun kepada pemerintahan NICA/Sekutu yang akan menduduki kota.`,
+              C: `Upaya memancing pasukan Sekutu agar tersesat di daerah pegunungan berhutan lebat.`,
+              D: `Memboikot seluruh produk pertanian yang akan dikirim ke Jakarta.`,
+              E: `Menyerahkan sepenuhnya tanggung jawab perang kepada para pemuda milisi.`
+            },
+            a: `B`,
+            p: `Jika warga tetap tinggal, mereka akan dikontrol, dikenakan pajak, dan dipaksa bekerja untuk Sekutu/NICA. Dengan mengosongkan kota bersamaan dengan aksi bumi hangus, rakyat meninggalkan "kota mati" bagi Sekutu, yang berarti memutus total dukungan sosial-ekonomi bagi pihak penjajah.`
+          },
+          {
+            id: 63,
+            q: `Dalam kronologi Bandung Lautan Api, meledaknya gudang mesiu Sekutu di Dayeuhkolot oleh Mohammad Toha sangat krusial dalam menunjang keberhasilan mundurnya pasukan TRI (Tentara Republik Indonesia). Hal ini dikarenakan...`,
+            o: {
+              A: `Ledakan tersebut menewaskan Komandan Tertinggi Sekutu di Jawa Barat.`,
+              B: `Ledakan yang sangat masif menciptakan kekacauan di kubu Sekutu dan menghentikan pengejaran musuh terhadap gelombang pengungsian TRI dan rakyat.`,
+              C: `Asap dari ledakan tersebut digunakan sebagai sinyal bagi pesawat udara RI untuk menjatuhkan bom.`,
+              D: `Gudang mesiu tersebut menyimpan cetak biru strategi penyerangan NICA ke Yogyakarta.`,
+              E: `Menghancurkan dokumen utang piutang pemerintah daerah Bandung kepada pemerintah kolonial.`
+            },
+            a: `B`,
+            p: `Gudang di Dayeuhkolot adalah gudang amunisi raksasa. Menghancurkannya bukan hanya melumpuhkan kemampuan logistik perang musuh, tetapi ledakannya yang dahsyat memecah konsentrasi dan pergerakan pasukan musuh, memberikan waktu emas bagi TRI dan rakyat untuk mundur ke selatan dengan aman.`
+          },
+          {
+            id: 64,
+            q: `Keputusan Kolonel A.H. Nasution membumihanguskan Bandung merupakan titik temu (middle ground) antara instruksi diplomasi dari Perdana Menteri Sjahrir dan tuntutan militansi dari para pejuang. Analisis yang tepat menggambarkan "titik temu" tersebut adalah...`,
+            o: {
+              A: `Kota diserahkan utuh kepada Sekutu (memenuhi diplomasi), tetapi pemerintahan sipil tetap dijalankan oleh orang Indonesia (memenuhi militansi).`,
+              B: `TRI meninggalkan kota untuk menghindari perang kota sesuai perintah PM Sjahrir, namun kota dihancurkan terlebih dahulu agar tidak bisa dimanfaatkan musuh sesuai kehendak pejuang.`,
+              C: `Menyerang markas Sekutu di utara (militansi), lalu mengajak mereka berunding damai di selatan (diplomasi).`,
+              D: `Mengizinkan NICA masuk ke Bandung (diplomasi), dengan syarat mereka membayar ganti rugi pemakaian gedung (militansi).`,
+              E: `Membakar setengah kota untuk menakuti musuh, lalu menyerahkan sisanya kepada PBB.`
+            },
+            a: `B`,
+            p: `PM Sjahrir memerintahkan pengosongan agar tidak merusak proses perundingan dengan Sekutu (diplomasi). Pejuang marah jika harus menyerah begitu saja. Nasution mengambil jalan tengah: mematuhi perintah mundur (mengosongkan kota), tapi memastikan kota itu tidak berguna bagi musuh dengan membakarnya (memuaskan hasrat tempur militer/pejuang).`
+          },
+          {
+            id: 65,
+            q: `Serangan Umum 1 Maret 1949 dilakukan secara mendadak pada pukul 06.00 WIB tepat ketika sirene jam malam berakhir. Mengapa pemilihan waktu (timing) "pagi hari setelah jam malam berakhir" ini menunjukkan kecerdasan intelijen taktis TNI?`,
+            o: {
+              A: `Karena tentara Belanda dilarang oleh PBB untuk menggunakan senjata sebelum matahari terbit.`,
+              B: `Pada waktu tersebut, psikologis dan kesiagaan tentara Belanda sedang dalam kondisi paling rendah karena pergantian jadwal jaga malam ke pagi.`,
+              C: `TNI ingin menunggu warga sipil berangkat ke pasar agar bisa berbaur untuk menyusup ke markas musuh.`,
+              D: `Cahaya matahari pagi menyilaukan pandangan para penembak jitu Belanda yang berada di menara pengawas.`,
+              E: `Senjata TKR mayoritas hanya bisa berfungsi jika cuaca sudah mulai hangat.`
+            },
+            a: `B`,
+            p: `Pukul 06.00 adalah titik di mana jam malam berakhir. Pasukan yang berjaga semalaman sedang lelah dan bersiap diganti, sementara pasukan pengganti belum sepenuhnya siap (shift change). Memukul musuh di titik transisi ini adalah strategi intelijen yang brilian karena element of surprise tercapai maksimal.`
+          },
+          {
+            id: 66,
+            q: `Berita keberhasilan Serangan Umum 1 Maret segera disebarkan melalui radio PC AURI di Playen, Gunung Kidul, yang kemudian diteruskan ke Sumatera, lalu ke India, hingga sampai ke PBB. Peran krusial stasiun radio klandestin (rahasia) ini bagi masa depan Indonesia adalah…`,
+            o: {
+              A: `Mengancam negara-negara tetangga agar segera mengirimkan bantuan persenjataan.`,
+              B: `Menembus blokade informasi total yang diterapkan Belanda, sehingga kebenaran eksistensi RI dan TNI bisa didengar oleh dunia internasional.`,
+              C: `Menyiarkan instruksi langsung dari Jenderal Sudirman kepada seluruh rakyat untuk menyerang istana negara.`,
+              D: `Mendapat keuntungan finansial dari iklan yang disiarkan ke luar negeri.`,
+              E: `Memandu pesawat tempur sisa-sisa Jepang untuk menjatuhkan logistik di Yogyakarta.`
+            },
+            a: `B`,
+            p: `Tanpa adanya jaringan radio pemancar rahasia di Gunung Kidul ini, keberhasilan menguasai Yogyakarta hanya akan menjadi kemenangan lokal yang tidak diketahui siapa pun. Menembus blokade informasi Belanda adalah kunci agar fakta lapangan ini sampai ke delegasi PBB (UNCI) di luar negeri.`
+          },
+          {
+            id: 67,
+            q: `Dalam persiapan Serangan Umum 1 Maret, Sri Sultan Hamengkubuwono IX mengusulkan ide serangan langsung ke ibukota dan memberikan izin keraton digunakan sebagai tempat persembunyian logistik/rapat. Keistimewaan status Sultan HB IX yang menguntungkan strategi ini adalah…`,
+            o: {
+              A: `Beliau memiliki pasukan pengawal keraton yang jumlahnya jauh lebih besar dari tentara Belanda.`,
+              B: `Militer Belanda terikat aturan ketat dan rasa segan untuk tidak menggeledah atau merusak kawasan keraton yang dipimpin oleh Raja Jawa yang dihormati.`,
+              C: `Sultan HB IX menjabat sebagai perwakilan resmi PBB di wilayah Yogyakarta.`,
+              D: `Belanda memiliki utang budi karena Sultan menyumbangkan dana bagi pemulihan ekonomi Eropa.`,
+              E: `Sultan memiliki senjata penangkal udara otomatis yang dipasang di benteng keraton.`
+            },
+            a: `B`,
+            p: `Sri Sultan HB IX adalah figur kharismatik yang dihormati baik oleh rakyat maupun pihak Belanda secara politis. Belanda sangat menjaga gengsi agar tidak dituduh merusak tradisi keraton, sehingga wilayah keraton menjadi "zona aman" (imunitas de facto) yang dimanfaatkan sebagai kantong koordinasi TNI dengan aman.`
+          },
+          {
+            id: 68,
+            q: `Bagi perundingan di tingkat internasional, peristiwa mundurnya pasukan TNI dari Yogyakarta setelah 6 jam berkuasa (pukul 12.00 siang) sering kali dieksploitasi Belanda sebagai "bukti kekalahan gerombolan TNI yang lari ketakutan". Namun di sidang PBB, diplomasi Indonesia membalas argumen tersebut dengan analisa meyakinkan, yaitu…`,
+            o: {
+              A: `Menjelaskan bahwa penarikan mundur itu adalah perintah langsung dari Dewan Keamanan PBB.`,
+              B: `Menyatakan bahwa tujuan utama bukan menduduki kota secara permanen tanpa logistik memadai, melainkan sebuah manuver taktis terukur untuk membuktikan TNI memiliki sistem komando yang sanggup melancarkan serangan masif terorganisir.`,
+              C: `Membekerkan data bahwa TNI kehabisan amunisi karena gudang senjata di luar kota diledakkan.`,
+              D: `Menyalahkan pemimpin pasukan lokal yang salah membaca jam instruksi mundur.`,
+              E: `Berdaih bahwa pasukan TNI sedang bersiap melaksanakan ibadah salat zuhur.`
+            },
+            a: `B`,
+            p: `Belanda mengejek TNI yang lari. Delegasi RI di PBB dengan cerdas memutarbalikkan narasi itu: menguasai ibu kota yang dijaga sangat ketat walau hanya 6 jam membutuhkan koordinasi intelijen, komando, dan logistik tingkat tinggi. Mundur secara teratur tepat sebelum tank musuh tiba justru membuktikan TNI adalah pasukan profesional yang disiplin, bukan "gerombolan liar" seperti tuduhan Belanda.`
+          },
+          {
+            id: 69,
+            q: `Jika kita membandingkan taktik antara Pertempuran Ambarawa (militer terbuka) dan Serangan Umum 1 Maret (serangan kejut politis), perbedaan tujuan strategis yang paling menonjol dari kedua pertempuran ini adalah…`,
+            o: {
+              A: `Ambarawa bertujuan menghancurkan kekuatan fisik Sekutu untuk mencegah perluasan wilayah, sedangkan SU 1 Maret bertujuan menciptakan efek kejut psikologis untuk modal tawar menawar di meja perundingan internasional.`,
+              B: `Ambarawa digerakkan secara spontan tanpa komando, sementara SU 1 Maret diawasi langsung oleh Presiden Soekarno.`,
+              C: `Ambarawa menggunakan taktik modern, sedangkan SU 1 Maret murni menggunakan senjata tradisional.`,
+              D: `Ambarawa merupakan perlawanan menuntut ganti rugi perang, sedangkan SU 1 Maret menuntut otonomi daerah.`,
+              E: `Kedua pertempuran tersebut memiliki tujuan yang sama, yaitu mendirikan negara yang lepas dari pengaruh Amerika Serikat.`
+            },
+            a: `A`,
+            p: `Palagan Ambarawa adalah murni pertempuran fisik-teritorial untuk memukul mundur dan mengusir musuh (Sekutu/Inggris) dari wilayah pedalaman Jawa Tengah. Sedangkan Serangan Umum 1 Maret tidak didesain untuk merebut kota selamanya, melainkan "serangan politik bersenjata" untuk mengirim pesan ke PBB bahwa narasi Belanda yang menyebut RI telah mati adalah kebohongan.`
+          },
+          {
+            id: 70,
+            q: `Perhatikan daftar tokoh berikut!
+
+1. Jenderal Sudirman
+2. Sri Sultan Hamengkubuwono IX
+3. Letkol Soeharto
+4. A.W.S. Mallaby
+Tokoh-tokoh yang memiliki andil krusial dalam keberhasilan Serangan Umum 1 Maret 1949 adalah…`,
+            o: {
+              A: `1, 2, dan 3`,
+              B: `1 dan 3`,
+              C: `2 dan 4`,
+              D: `4 saja`,
+              E: `Semua benar`
+            },
+            a: `A`,
+            p: `Serangan Umum 1 Maret diinisiasi oleh gagasan Sultan HB IX (2), direstui oleh Panglima Besar Jenderal Sudirman (1), dan secara taktis komando lapangan di sektor barat dan pusat dipimpin oleh Letkol Soeharto (3). Mallaby (4) adalah perwira Inggris yang tewas di Surabaya.`
+          },
+          {
+            id: 71,
+            q: `Hampir seluruh insiden pertempuran di awal kemerdekaan (Semarang, Surabaya, Ambarawa, Medan) melibatkan benturan awal dengan pasukan Sekutu (AFNEI). Alasan utama mengapa Sekutu yang awalnya disambut netral berubah menjadi sasaran amarah rakyat dan pejuang Indonesia adalah…`,
+            o: {
+              A: `Sekutu secara resmi mewajibkan pemuda Indonesia masuk wajib militer untuk dikirim ke Jepang.`,
+              B: `Sekutu melanggar komitmennya dengan membonceng NICA (Belanda) dan secara terang-terangan mempersenjatai mantan tawanan militer kolonial untuk kembali berkuasa.`,
+              C: `Tentara Sekutu melakukan perampasan hasil bumi untuk dijual kembali ke pasar Eropa.`,
+              D: `Sekutu mendirikan pos penjagaan yang menghalangi warga pribumi melakukan aktivitas keagamaan.`,
+              E: `Karena propaganda provokatif yang disiarkan terus-menerus melalui radio oleh tentara Jepang yang bersembunyi.`
+            },
+            a: `B`,
+            p: `Mandat awal Sekutu murni untuk mengurus tawanan perang dan melucuti Jepang (kemanusiaan dan pemulangan). Rakyat Indonesia awalnya koperatif. Bentrokan meledak seketika ketika terbukti NICA ikut membonceng di belakang Sekutu dan mulai mempersenjatai KNIL yang mengancam kedaulatan kemerdekaan.`
+          },
+          {
+            id: 72,
+            q: `Mencermati pola perjuangan antara diplomasi (Perjanjian Linggarjati, Renville, Roem Royen) dan perjuangan fisik bersenjata (Bandung Lautan Api, Puputan Margarana, SU 1 Maret), dapat ditarik kesimpulan historis analitis bahwa...`,
+            o: {
+              A: `Perjuangan diplomasi selalu menghancurkan hasil jerih payah perlawanan militer di lapangan.`,
+              B: `Kemerdekaan mutlak Indonesia hanya bisa diraih melalui jalur militer murni tanpa campur tangan PBB.`,
+              C: `Keduanya merupakan dua sisi mata uang; diplomasi tidak akan didengar internasional tanpa adanya eksistensi pembuktian kekuatan militer, dan kemenangan militer membutuhkan pengesahan hukum melalui meja diplomasi.`,
+              D: `Militer Indonesia menolak sepenuhnya seluruh hasil kompromi dari kalangan elit diplomat sipil.`,
+              E: `Pihak kolonial Belanda hanya mematuhi kesepakatan diplomasi jika mereka memenangkan pertempuran di lapangan.`
+            },
+            a: `C`,
+            p: `Ini adalah sintesis sejarah revolusi kemerdekaan RI. Strategi diplomasi dan perlawanan fisik saling melengkapi. Kekuatan militer (seperti SU 1 Maret) memberi posisi tawar (bargaining power) bagi diplomat (Roem, Sjahrir) di meja perundingan. Sebaliknya, kemenangan di medan laga harus diikat secara legal di mata hukum internasional (KMB) agar diakui kedaulatannya secara resmi.`
+          },
+          {
+            id: 73,
+            q: `Pemindahan tawanan tentara Jepang dari Pabrik Gula Cepiring ke Penjara Bulu di Semarang memicu upaya pelarian dan pemberontakan. Jika dianalisis dari segi keamanan, mengapa pemuda Semarang awalnya bersikeras memindahkan para tawanan Jepang tersebut ke pusat kota?`,
+            o: {
+              A: `Agar tawanan dapat dijadikan pekerja paksa untuk membangun pertahanan kota.`,
+              B: `Untuk mencegah pasukan Jepang melakukan sabotase pabrik gula dan menggabungkan diri dengan pasukan Kidobutai di Jatingaleh.`,
+              C: `Pemuda Semarang bermaksud menyerahkan tawanan langsung kepada Gubernur Mr. Wongsonegoro.`,
+              D: `Untuk ditukarkan dengan senjata milik tentara Sekutu yang segera mendarat.`,
+              E: `Menjadikan tawanan Jepang sebagai sandaera apabila Belanda menjatuhkan bom di kota Semarang.`
+            },
+            a: `B`,
+            p: `Tawanan militer Jepang di luar kota sangat berisiko melakukan konsolidasi atau menyabotase infrastruktur ekonomi (pabrik gula). Pemindahan ke Penjara Bulu (pusat kota) bertujuan agar tawanan lebih mudah diawasi dan tidak bergabung dengan pasukan Jepang bersenjata di Jatingaleh.`
+          },
+          {
+            id: 74,
+            q: `Tandon air di Siranda (Candi) menjadi objek sangat vital yang dipertahankan dalam pertempuran Semarang hingga menyebabkan gugurnya dr. Kariadi. Secara taktis dan sosiologis, mengapa tandon air ini menjadi pusat pusaran konflik?`,
+            o: {
+              A: `Tandon tersebut merupakan jalan rahasia bawah tanah menuju pelabuhan.`,
+              B: `Pasukan Jepang menyembunyikan senjata terkuat mereka di dasar tandon.`,
+              C: `Air bersih adalah infrastruktur penyokong kehidupan seluruh warga kota; isu percunan tandon akan memicu kepanikan massal dan kelumpuhan kota.`,
+              D: `Sekutu menjanjikan bayaran mahal jika pemuda berhasil mempertahankan tandon tersebut.`,
+              E: `Tandon air tersebut merupakan markas utama badan intelijen Republik Indonesia.`
+            },
+            a: `C`,
+            p: `Dalam perang kota, objek vital seperti pasokan air, listrik, dan komunikasi adalah kunci bertahan hidup. Isu bahwa Jepang meracuni sumber air minum utama warga Semarang adalah bentuk teror psikologis yang bisa melumpuhkan warga, sehingga perlindungannya sangat krusial.`
+          },
+          {
+            id: 75,
+            q: `Setelah pertempuran berdarah selama lima hari, pertempuran baru benar-benar berhenti setelah pasukan Sekutu (Inggris) mendarat pada 20 Oktober 1945. Mengapa kedatangan Sekutu saat itu justru berhasil menghentikan pertempuran antara pemuda dan Jepang?`,
+            o: {
+              A: `Sekutu langsung menembak mati seluruh komandan pasukan Jepang di Semarang.`,
+              B: `Pasukan Jepang memang sedang menunggu instruksi dari Sekutu untuk menyerahkan senjata sesuai kesepakatan internasional.`,
+              C: `Pemuda Semarang takut dengan persenjataan berat yang dibawa Sekutu.`,
+              D: `Sekutu menjanjikan kemerdekaan penuh bagi Jawa Tengah jika pertempuran dihentikan.`,
+              E: `Sekutu membayar ganti rugi kepada keluarga pemuda yang menjadi korban.`
+            },
+            a: `B`,
+            p: `Pasukan Jepang terikat kewajiban untuk menjaga status quo dan hanya boleh menyerahkan senjatanya kepada pasukan Sekutu (sebagai pemenang PD II), bukan kepada laskar pemuda Indonesia. Ketika Sekutu tiba, Jepang akhirnya melucuti senjata mereka secara resmi kepada Sekutu, sehingga kontak senjata dengan pemuda mereda.`
+          },
+          {
+            id: 76,
+            q: `Pembangunan Monumen Tugu Muda di Semarang didedikasikan untuk mengenang pertempuran 5 hari. Secara filosofis kesejarahan, monumen ini melambangkan...`,
+            o: {
+              A: `Kemenangan mutlak tentara Jepang melawan pasukan Belanda.`,
+              B: `Penghargaan khusus bagi pimpinan militer Sekutu yang mendamaikan Semarang.`,
+              C: `Perjuangan dan pengorbanan rakyat semesta serta pemuda yang dengan gagah berani mempertahankan kemerdekaan dari sisa-sisa kekuatan fasisme militer Jepang.`,
+              D: `Monumen perdamaian antara Indonesia dan Jepang dalam membangun ekonomi Asia.`,
+              E: `Titik nol kota Semarang dalam menentukan batas wilayah dengan daerah lain.`
+            },
+            a: `C`,
+            p: `Tugu Muda adalah simbol heroisme dan kebangkitan "pemuda" dan rakyat sipil Semarang yang berani mempertaruhkan nyawa melawan pasukan Jepang yang terlatih, membuktikan militansi mempertahankan proklamasi.`
+          },
+          {
+            id: 77,
+            q: `Pertempuran di Medan Area melibatkan banyak kelompok laskar pemuda bersenjata (seperti Napindo, Pesindo, dan Barisan Merah) sebelum TNI terbentuk kuat. Fenomena munculnya berbagai laskar ini membuktikan bahwa...`,
+            o: {
+              A: `Terjadi perebutan kekuasaan antar suku di wilayah Sumatera Utara.`,
+              B: `Kesadaran mempertahankan kemerdekaan tumbuh secara akar rumput dari berbagai elemen ideologi massa, meskipun belum ada komando tunggal yang solid.`,
+              C: `Pemerintah pusat di Jakarta melarang pembentukan angkatan perang resmi di wilayah Sumatera.`,
+              D: `Sekutu sengaja mendanai kelompok-kelompok pemuda untuk saling memusuhi.`,
+              E: `Laskar-laskar tersebut berjuang demi upah dari pemerintahan militer Jepang.`
+            },
+            a: `B`,
+            p: `Beragam laskar pemuda dengan berbagai latar belakang ideologi di Medan menunjukkan bahwa perlawanan revolusi bersifat spontan dari bawah (grassroot). Kesadaran nasionalisme tumbuh merata, namun di awal revolusi belum terorganisir dalam satu komando terpusat.`
+          },
+          {
+            id: 78,
+            q: `Ketika pasukan pejuang Indonesia terdesak keluar dari kota Medan, mereka tidak membubarkan diri, melainkan membangun jalur koordinasi yang disebut "Komando Resimen Laskar Rakyat Medan Area" di Tebing Tinggi. Strategi desentralisasi basis perlawanan ini membuktikan bahwa...`,
+            o: {
+              A: `Pejuang Indonesia kehabisan dana untuk menyewa gedung di pusat kota Medan.`,
+              B: `Perjuangan bersifat teritorial luwes; hilangnya satu kota tidak berarti hancurnya komando perlawanan militer.`,
+              C: `Tebing Tinggi memiliki pabrik senjata peninggalan Belanda yang belum dihancurkan.`,
+              D: `Pejuang berniat memisahkan diri dari Republik Indonesia dan mendirikan negara Sumatera.`,
+              E: `Pihak Sekutu tidak memiliki kendaraan militer untuk mengejar pejuang ke luar kota.`
+            },
+            a: `B`,
+            p: `Taktik gerilya selalu mengandalkan desa sebagai basis pertahanan (hinterland). Dengan mundur dari kota, pejuang menyatukan komando di pinggiran untuk terus merongrong musuh di dalam kota dan memutus suplai kebutuhan Sekutu yang disalurkan dari luar kota.`
+          },
+          {
+            id: 79,
+            q: `Brigadir Jenderal T.E.D. Kelly bertindak sangat reaktif pasca insiden Jalan Bali dengan mengeluarkan ultimatum agar pemuda Medan menyerahkan senjata mereka. Jika dianalisis, mengapa ultimatum Kelly ini justru menjadi blunder yang memperluas pertempuran?`,
+            o: {
+              A: `Pemuda Medan sama sekali tidak memiliki senjata untuk diserahkan.`,
+              B: `Ultimatum tersebut diterjemahkan keliru oleh penerjemah lokal.`,
+              C: `Pemuda Indonesia menganggap pelucutan senjata sama dengan merampas harga diri proklamasi, yang justru memprovokasi emosi dan menyatukan seluruh laskar untuk menyerang.`,
+              D: `Ultimatum tersebut melanggar kesepakatan langsung antara Soekarno dan Ratu Belanda.`,
+              E: `Jenderal Kelly hanya mengancam tanpa memiliki pasukan yang nyata.`
+            },
+            a: `C`,
+            p: `Ancaman dan paksaan menyerahkan senjata kepada bangsa yang baru merdeka selalu diartikan sebagai upaya mengembalikan penjajahan. Bukannya takut, ultimatum tersebut malah menjadi pemantik yang menyolidkan seluruh faksi pemuda untuk melawan Sekutu secara frontal.`
+          },
+          {
+            id: 80,
+            q: `Puncak ketegangan "Medan Area" membuktikan kegagalan Sekutu (Inggris) sebagai pasukan perdamaian internasional, karena…`,
+            o: {
+              A: `Sekutu gagal menemukan lokasi tambang minyak di Sumatera.`,
+              B: `Sekutu secara nyata memihak dan menjadi alat bagi NICA (Belanda) untuk merestorasi kekuasaan kolonial, melanggar mandat awal kedatangan mereka.`,
+              C: `Inggris menarik seluruh pasukannya sebelum pertempuran terjadi.`,
+              D: `Tentara Sekutu melakukan pemberontakan terhadap Jenderal Kelly.`,
+              E: `PBB mencabut hak veto Inggris setelah pertempuran tersebut.`
+            },
+            a: `B`,
+            p: `Status awal Sekutu adalah netral (hanya mengurus tawanan perang). Kegagalan terbesar mereka secara politik adalah membiarkan diri mereka diboncengi oleh NICA dan turut campur menekan republik, yang membuat mereka kehilangan kepercayaan dari pihak Indonesia.`
+          },
+          {
+            id: 81,
+            q: `Secara geografis dan taktis, kota Ambarawa memiliki arti yang sangat penting bagi kedua belah pihak yang bertikai. Mengapa militer Sekutu sangat berkepentingan menguasai wilayah Ambarawa dan Magelang?`,
+            o: {
+              A: `Terdapat cadangan emas peninggalan Belanda yang tertimbun di benteng Ambarawa.`,
+              B: `Ambarawa adalah jalur lalu lintas strategis (nadi penghubung) yang memegang kendali akses dari pesisir Semarang menuju wilayah pedalaman (Yogyakarta) yang menjadi pusat kekuatan RI.`,
+              C: `Wilayah tersebut memiliki bandara internasional terbesar di Jawa.`,
+              D: `Penduduk Ambarawa secara resmi menyatakan diri bergabung dengan negara Belanda.`,
+              E: `PBB menunjuk Ambarawa sebagai zona netral bebas militer.`
+            },
+            a: `B`,
+            p: `Ambarawa berada di posisi "leher" Jawa Tengah. Siapapun yang menguasai Ambarawa bisa mengontrol pergerakan militer dari pantai utara (Semarang) menuju pedalaman Jawa Tengah (termasuk Yogyakarta dan Surakarta). Itulah mengapa TKR mati-matian mencegah Sekutu meluas dari wilayah ini.`
+          },
+          {
+            id: 82,
+            q: `Keberhasilan TKR memukul mundur Sekutu dari Ambarawa ke Semarang dijadikan sebagai Hari Juang Kartika (Hari Infanteri). Analisis di balik penetapan hari tersebut bagi sejarah TNI adalah…`,
+            o: {
+              A: `Untuk mengenang persenjataan modern yang berhasil dibeli dari luar negeri.`,
+              B: `Bukti bahwa taktik infanteri (pasukan darat/pejalan kaki) dengan strategi tradisional dan semangat juang mampu mematahkan kekuatan kavaleri/artileri modern musuh.`,
+              C: `Mengenang peran Angkatan Udara yang pertama kali berhasil menjatuhkan bom di Ambarawa.`,
+              D: `Menandai berakhirnya campur tangan militer internasional di Indonesia.`,
+              E: `Sebagai peringatan perdamaian militer antara TKR dan tentara sekutu Inggris.`
+            },
+            a: `B`,
+            p: `TKR saat itu mengandalkan infanteri murni (pasukan darat tanpa tank atau pesawat yang memadai). Kemenangan Ambarawa membuktikan bahwa mobilitas dan kegigihan infanteri yang merakyat merupakan kekuatan inti pertahanan Indonesia.`
+          },
+          {
+            id: 83,
+            q: `Dalam strategi "Supit Urang" yang diterapkan Sudirman, keberhasilan pengepungan sangat bergantung pada kolaborasi berbagai batalion (seperti dari Surakarta, Salatiga, dan Purwokerto). Nilai sosiologis dari strategi gabungan ini adalah…`,
+            o: {
+              A: `Persaingan antar daerah untuk menunjukkan siapa laskar terkuat.`,
+              B: `Kuatnya ikatan ego kedaerahan yang sulit disatukan dalam militer.`,
+              C: `Solidaritas dan peleburan identitas lokal ke dalam satu komando nasional (TKR) demi tujuan bersama mempertahankan NKRI.`,
+              D: `Kelemahan komando Sudirman yang terpaksa meminjam pasukan dari berbagai daerah.`,
+              E: `Strategi tersebut murni diatur oleh tokoh-tokoh politik sipil di Jakarta.`
+            },
+            a: `C`,
+            p: `Pengerahan pasukan dari berbagai wilayah Jawa Tengah menunjukkan bahwa TKR bukan pasukan kedaerahan yang terpecah, melainkan sebuah instrumen negara yang memiliki kesadaran nasional untuk saling membantu wilayah lain yang diserang penjajah.`
+          },
+          {
+            id: 84,
+            q: `Sekutu/Inggris sering kali berlindung di balik benteng peninggalan Belanda (Willem I) selama di Ambarawa. Secara taktis, apa yang dilakukan TKR untuk menghadapi musuh yang bertahan di benteng pertahanan kokoh?`,
+            o: {
+              A: `Membangun benteng baru yang lebih tinggi di seberang Ambarawa.`,
+              B: `Menggunakan taktik pengepungan konstan untuk memutus akses air, makanan, dan amunisi sehingga musuh terisolasi dan kelelahan secara psikologis.`,
+              C: `Menunggu Sekutu keluar dari benteng secara damai melalui diplomasi.`,
+              D: `Menggunakan tank-tank raksasa rampasan dari Jepang untuk menghancurkan tembok.`,
+              E: `Menyewa pesawat komersial untuk menjatuhkan logistik di dalam benteng.`
+            },
+            a: `B`,
+            p: `Karena TKR tidak memiliki alat peledak/meriam besar penghancur benteng, taktik Supit Urang digunakan untuk melingkari benteng dari semua sisi. Pengepungan total ini mencekik suplai musuh, memaksa mereka lari meninggalkan benteng dan mundur ke Semarang.`
+          },
+          {
+            id: 85,
+            q: `I Gusti Ngurah Rai menamai pasukannya sebagai "Ciung Wanara". Dari segi psikologis sejarah perjuangan kemerdekaan, penamaan pasukan menggunakan elemen historis dan kearifan lokal bertujuan untuk...`,
+            o: {
+              A: `Mengelabui intelijen Belanda dengan nama yang terdengar seperti kelompok seniman.`,
+              B: `Membangkitkan spirit kepahlawanan, keberanian mitologis, dan kebanggaan identitas lokal yang siap berkorban demi negara.`,
+              C: `Meminta perlindungan dari raja-raja masa lalu melalui ritual mistis.`,
+              D: `Mengisolasi pasukan Bali agar tidak diganggu oleh pasukan dari pulau Jawa.`,
+              E: `Menunjukkan kepada dunia internasional bahwa Indonesia belum memiliki tentara modern.`
+            },
+            a: `B`,
+            p: `Menggunakan nama yang merujuk pada pahlawan/mitos keperkasaan di masa lampau (Ciung Wanara) efektif memompa moral pasukan (esprit de corps) dengan menanamkan keberanian dan kebanggaan kultur lokal yang terintegrasi pada nasionalisme Indonesia.`
+          },
+          {
+            id: 86,
+            q: `Desa Margarana dipilih oleh Ngurah Rai sebagai rute konsolidasi sebelum terkepung. Secara geografis, wilayah perdesaan dan ngarai di Bali sering dimanfaatkan pejuang untuk...`,
+            o: {
+              A: `Membangun landasan pacu pesawat kecil.`,
+              B: `Mencari keuntungan ekonomi dengan mengumpulkan pajak dari petani lokal.`,
+              C: `Menerapkan taktik perang gerilya dengan bersembunyi (kamuflase) dan menggalang dukungan rakyat secara sembunyi-sembunyi dari pantauan udara NICA.`,
+              D: `Mengundang tentara Sekutu untuk beristirahat secara damai.`,
+              E: `Menyerahkan diri secara diam-diam agar tidak diketahui marksa pusat.`
+            },
+            a: `C`,
+            p: `Perang revolusi adalah perang rakyat. Wilayah pedesaan/hutan di Bali menjadi basis teraman untuk taktik gerilya (hit-and-run) dan menyembunyikan pasukan dari patroli Belanda, sekaligus memperoleh dukungan logistik dari rakyat lokal.`
+          },
+          {
+            id: 87,
+            q: `Belanda mengutus Kapten J.B.T. Konig untuk membujuk Ngurah Rai berdamai. Di saat yang sama, tokoh lokal pro-Belanda, Tjokorda Gde Raka Soekawati, dijadikan Presiden Negara Indonesia Timur (NIT). Fenomena diplomasi ini membuktikan taktik klasik Belanda, yaitu...`,
+            o: {
+              A: `Asimilasi budaya Eropa ke dalam tradisi bangsawan Nusantara.`,
+              B: `Devide et Impera (pecah belah), dengan memanfaatkan elit lokal ambisius untuk mendirikan negara boneka guna melawan kekuatan republikan.`,
+              C: `Pemberian kemerdekaan secara bertahap kepada kerajaan-kerajaan timur.`,
+              D: `Menyamakan status ekonomi pejabat lokal dengan perwira militer Belanda.`,
+              E: `Taktik bumi hangus sosial yang membangkrutkan kerajaan lokal.`
+            },
+            a: `B`,
+            p: `Mengangkat elit lokal menjadi pejabat di negara boneka (NIT) dan merayu panglima republik untuk takluk adalah taktik Devide et Impera. Belanda memecah belah persatuan bangsa dengan menciptakan iming-iming kekuasaan lokal.`
+          },
+          {
+            id: 88,
+            q: `Meskipun Ngurah Rai dan seluruh pasukannya gugur di Margarana (kekalahan tempur), peristiwa tragis ini menjadi bumerang politik bagi eksistensi Negara Indonesia Timur (NIT) bentukan Belanda. Mengapa demikian?`,
+            o: {
+              A: `Belanda kehabisan dana operasi militer dan bangkrut di wilayah timur.`,
+              B: `Pengorbanan Puputan membangkitkan simpati internasional dan membuka mata publik bahwa rakyat Bali sejati tidak menyetujui pendirian NIT.`,
+              C: `PBB memerintahkan Presiden NIT untuk mengundurkan diri saat itu juga.`,
+              D: `Militer Belanda di Bali membelot dan bergabung dengan TNI karena merasa bersalah.`,
+              E: `Peristiwa tersebut menyebabkan gunung meletus dan menghancurkan markas Belanda.`
+            },
+            a: `B`,
+            p: `Puputan mematahkan propaganda Belanda. Belanda selalu berkata bahwa NIT didirikan murni karena keinginan rakyat Timur. Dengan matinya Ngurah Rai, dunia tahu bahwa NIT adalah bentuk pemaksaan kolonial yang dilawan mati-matian oleh sebagian besar rakyatnya sendiri.`
+          },
+          {
+            id: 89,
+            q: `Sebelum pecah pertempuran 10 November, insiden perobekan bendera Belanda (Merah-Putih-Biru) menjadi Merah-Putih di Hotel Yamato terjadi pada bulan September. Insiden ini membuktikan bahwa katalis utama konflik di Surabaya berakar dari…`,
+            o: {
+              A: `Kebijakan pajak perhotelan yang memberatkan kaum pedagang Surabaya.`,
+              B: `Arogansi sekelompok orang Belanda yang memancing provokasi terhadap sentimen kedaulatan yang sedang menyala di hati rakyat Indonesia.`,
+              C: `Kesalahan koordinasi pemerintahan Jepang sebelum meninggalkan hotel tersebut.`,
+              D: `Instruksi langsung dari Presiden Soekarno untuk menghapus simbol asing.`,
+              E: `Perebutan gedung bersejarah antara Sekutu dan milisi lokal.`
+            },
+            a: `B`,
+            p: `Kelompok Belanda yang baru dibebaskan (APWI) dengan arogan mengibarkan bendera triwarna di Surabaya, memicu kemarahan karena tindakan itu tidak menghargai kemerdekaan RI yang telah diproklamasikan. Sentimen kedaulatan inilah akar utama ledakan amarah rakyat.`
+          },
+          {
+            id: 90,
+            q: `Pasukan Inggris pimpinan Jenderal Mansergh mengandalkan kekuatan artileri laut dan darat yang masif karena mereka gagal mengantisipasi bentuk perlawanan "perang semesta". Kegagalan intelijen Inggris memahami perang semesta ini terlihat dari asumsi mereka bahwa…`,
+            o: {
+              A: `Rakyat Surabaya akan menyerah jika pemimpin militernya ditangkap, padahal perlawanan dilakukan mandiri oleh rakyat, laskar, dan santri tanpa hierarki militer yang kaku.`,
+              B: `Surabaya tidak memiliki cadangan makanan sehingga akan mudah ditaklukkan melalui blokade ekonomi.`,
+              C: `Pasukan Jepang akan membantu Sekutu melawan TKR.`,
+              D: `Hujan lebat akan melumpuhkan pergerakan pasukan Indonesia.`,
+              E: `TKR hanya akan menyerang di malam hari.`
+            },
+            a: `A`,
+            p: `Militer klasik Eropa berasumsi perang hanya dimainkan oleh militer resmi. Saat komando militer lumpuh, perang berakhir. Namun di Surabaya, ketika pemimpin resmi pergi, laskar kiai, pemuda, dan rakyat biasa otomatis mengangkat senjata (Perang Semesta).`
+          },
+          {
+            id: 91,
+            q: `Keputusan untuk menolak ultimatum Mayor Jenderal Mansergh tidak hanya diambil oleh elemen militer, tetapi didukung secara mutlak oleh Gubernur Jawa Timur (Suryo) pada 9 November 1945 malam. Posisi Gubernur Suryo ini sangat penting secara yuridis dan politis karena...`,
+            o: {
+              A: `Beliau menjanjikan gaji besar bagi pemuda yang bersedia maju ke medan perang.`,
+              B: `Mengesahkan penolakan tersebut sebagai sikap resmi pemerintah Republik Indonesia di Jawa Timur, yang melegitimasi bahwa perlawanan rakyat adalah tindakan negara, bukan pemberontakan liar.`,
+              C: `Gubernur Suryo memiliki kewenangan menembakkan meriam artileri pantai.`,
+              D: `Ia adalah tokoh yang paling ditakuti oleh pasukan Inggris karena kemampuannya berbahasa asing.`,
+              E: `Sebagai jaminan bahwa PBB akan membantu jika terjadi pertumpahan darah.`
+            },
+            a: `B`,
+            p: `Keputusan Gubernur Suryo memberikan status hukum (legalitas pemerintahan) bahwa perang yang akan dilakukan esok hari (10 November) adalah perang membela kehormatan negara yang direstui oleh institusi negara yang sah.`
+          },
+          {
+            id: 92,
+            q: `Pertempuran heroik 10 November 1945 mengundang perhatian jurnalis internasional. Secara diplomasi global, perlawanan dahsyat rakyat Surabaya ini mengubah persepsi dunia Barat karena...`,
+            o: {
+              A: `Mengancam keamanan jalur laut internasional di Selat Madura.`,
+              B: `Menghapus mitos kehebatan armada laut Inggris.`,
+              C: `Meruntuhkan propaganda NICA yang menyebut Indonesia tidak pantas merdeka dan membuktikan keteguhan nyata rakyat Indonesia untuk menolak dijajah kembali dengan harga apa pun.`,
+              D: `Membuat negara-negara persemakmuran Inggris (Australia dan India) menjajah Indonesia secara bersama.`,
+              E: `Memaksa PBB memindahkan kantor pusatnya ke Indonesia.`
+            },
+            a: `C`,
+            p: `Media asing melihat langsung bahwa bukan hanya tentara yang melawan, tapi ibu-ibu, pemuda, santri, bahkan anak-anak. Ini mematikan propaganda NICA yang mengatakan bahwa kemerdekaan Indonesia hanya dimaui segelintir politisi elitis (fasis). Dunia pun mulai bersimpati pada Indonesia.`
+          },
+          {
+            id: 93,
+            q: `Keputusan Kolonel A.H. Nasution untuk mematuhi perintah Perdana Menteri Sjahrir agar TRI meninggalkan Bandung, meskipun mendapat tekanan dari bawahannya yang ingin terus bertempur, menunjukkan sikap…`,
+            o: {
+              A: `Ketakutan panglima militer terhadap kekuatan meriam Sekutu.`,
+              B: `Ketaatan pada asas hierarki dan supremasi sipil dalam pemerintahan yang demokratis demi menyukseskan grand-strategy diplomasi negara.`,
+              C: `Pembangkangan diam-diam terhadap instruksi Presiden Soekarno.`,
+              D: `Keinginan Nasution untuk memindahkan ibu kota provinsi ke Tasikmalaya.`,
+              E: `Keputusasaan karena tidak mendapatkan bantuan persenjataan dari Yogyakarta.`
+            },
+            a: `B`,
+            p: `Di masa republik yang baru berdiri, kepatuhan militer (Nasution) pada keputusan elit pemerintahan sipil (Sjahrir) menunjukkan profesionalisme. Meski pahit (harus mundur), militer sadar bahwa strategi diplomasi internasional yang dijalankan PM Sjahrir adalah bagian dari perjuangan mempertahankan kemerdekaan.`
+          },
+          {
+            id: 94,
+            q: `Majelis Persatuan Perjuangan Priangan (MP3) memainkan peran penting sebelum peristiwa pembumihangusan. Keterlibatan forum yang terdiri dari tokoh militer dan masyarakat sipil lokal ini dalam mengambil keputusan membuktikan bahwa...`,
+            o: {
+              A: `Militer Indonesia kebingungan dan tidak memiliki strategi mandiri.`,
+              B: `Keputusan bumi hangus bukan tindakan sepihak tentara, melainkan konsensus yang lahir dari kegelisahan dan partisipasi kolektif rakyat Jawa Barat.`,
+              C: `Keputusan perang harus selalu menunggu hasil voting internasional.`,
+              D: `Sekutu berhasil menyusapkan mata-mata ke dalam forum masyarakat.`,
+              E: `Pemerintah pusat di Jakarta sudah tidak diakui kekuasaannya di wilayah Priangan.`
+            },
+            a: `B`,
+            p: `MP3 adalah wadah musyawarah elemen sipil dan pejuang. Kebijakan "Bandung Lautan Api" diputuskan secara bersama, menunjukkan perlawanan dan pengorbanan (menghancurkan rumah sendiri) ini didukung oleh nurani rakyat secara kolektif demi tidak jatuh ke tangan penjajah.`
+          },
+          {
+            id: 95,
+            q: `Selain mencegah Sekutu memanfaatkan fasilitas kota, pembakaran Bandung Selatan memberi dampak strategis jangka menengah bagi peperangan yang berlanjut. Hancurnya infrastruktur Bandung Selatan mengakibatkan...`,
+            o: {
+              A: `Pasukan Republik mudah dikalahkan di pedesaan karena kehilangan pelindung.`,
+              B: `Agresi Militer Belanda dan mobilitas Sekutu untuk menembus wilayah pedalaman Jawa Barat menjadi sangat terhambat akibat hilangnya basis logistik perkotaan.`,
+              C: `Penduduk Bandung menjadi kaya mendadak dari asuransi perang.`,
+              D: `Sekutu secara sukarela membangun fasilitas kota yang lebih modern.`,
+              E: `PBB menghukum Sjahrir karena merusak fasilitas ekonomi.`
+            },
+            a: `B`,
+            p: `Pasukan kolonial sangat bergantung pada fasilitas kota (listrik, jalan, gudang, gedung telekomunikasi). Tanpa fasilitas ini, pergerakan operasi militer musuh ke pegunungan (pedalaman Jawa Barat) untuk mengejar laskar Siliwangi menjadi tersendat dan penuh risiko logistik.`
+          },
+          {
+            id: 96,
+            q: `Eksodus ribuan warga Bandung melahirkan ikatan batin kuat yang diabadikan dalam lagu "Halo-Halo Bandung". Dalam analisis sosial sejarah, lagu perjuangan dan karya seni yang lahir dari tragedi (seperti bumi hangus) berfungsi vital sebagai…`,
+            o: {
+              A: `Media hiburan para prajurit untuk menghilangkan stres selama perang.`,
+              B: `Alat propaganda Belanda untuk menarik simpati rakyat.`,
+              C: `Monumen memori kolektif yang merawat optimisme ("sekarang telah menjadi lautan api, mari Bung rebut kembali") dan mentransfer semangat perjuangan antar generasi.`,
+              D: `Laporan kronologis resmi yang harus diserahkan kepada Mahkamah Internasional PBB.`,
+              E: `Lagu kebangsaan sementara sebelum Indonesia Raya kembali dinyanyikan.`
+            },
+            a: `C`,
+            p: `Lagu perjuangan bukan sekadar hiburan. Liriknya merangkum janji sejarah ("merebut kembali"). Lagu ini menjaga memori bangsa, membangun militansi psikologis, dan merawat harapan (resilience) di tengah penderitaan pengungsian.`
+          },
+          {
+            id: 97,
+            q: `Dalam Serangan Umum 1 Maret, target utama pendudukan selama 6 jam adalah wilayah pusat ibu kota Yogyakarta (seperti Kantor Pos, Stasiun, Istana Kepresidenan/Gedung Agung). Dari sudut pandang strategi "psy-war" (perang psikologis), penaklukan objek vital ibu kota ini bertujuan untuk…`,
+            o: {
+              A: `Menghientikan total jalur kereta api antarprovinsi secara permanen.`,
+              B: `Menghancurkan moral militer Belanda secara telak karena jantung pertahanan simbolik mereka bisa dibobol dengan mudah pada siang bolong.`,
+              C: `Mengamankan persediaan emas nasional yang disimpan di ruang bawah tanah keraton.`,
+              D: `Mencuri teknologi mesin telegram Belanda untuk komunikasi militer TNI.`,
+              E: `Membebaskan tawanan sipil yang dihukum di dalam benteng Vredeburg.`
+            },
+            a: `B`,
+            p: `Menguasai fasilitas pusat pemerintahan/ibu kota adalah penanda supremasi militer. Berhasil menduduki wilayah paling dijaga oleh Belanda (di sekitar Gedung Agung & Kantor Pos) di siang hari merupakan tamparan psikologis sangat keras bagi ego komando militer Belanda.`
+          },
+          {
+            id: 98,
+            q: `Sistem pertahanan "Wehrkreise" yang diadopsi dari taktik Jerman digunakan oleh TNI di bawah komando Letkol Soeharto dan Jenderal Sudirman. Konsep utama dari taktik gerilya Wehrkreise ini, yang berujung pada suksesnya SU 1 Maret adalah…`,
+            o: {
+              A: `Mengumpulkan jutaan tentara dalam satu garis lurus seperti perang parit.`,
+              B: `Desentralisasi komando, di mana pasukan dibagi ke dalam kantong-kantong pertahanan wilayah (circle) yang mandiri namun dapat menyerang secara serentak ke satu titik pusat (Yogyakarta).`,
+              C: `Menggunakan seragam tentara musuh untuk menyerang dari dalam markas.`,
+              D: `Membangun benteng beton melingkar di perbatasan kota.`,
+              E: `Taktik bertahan statis tanpa melakukan serangan inisiatif sedikit pun.`
+            },
+            a: `B`,
+            p: `Wehrkreise adalah sistem kantong teritorial. Pasukan dipecah dan menyebar secara mandiri di wilayah pedesaan (kantong gerilya), yang kebal terhadap serangan.`
+          },
+          {
+            id: 99,
+            q: `Menjelang Serangan 1 Maret, pasukan Belanda bersikap sangat santai (overconfident) dan mengira situasi keamanan Yogyakarta sepenuhnya aman. Blunder analisa intelijen Belanda ini disebabkan oleh keyakinan mereka bahwa…`,
+            o: {
+              A: `Pasukan TNI sedang berlibur akibat musim hujan yang parah.`,
+              B: `Dengan tertangkapnya pemimpin politik (Soekarno-Hatta) di Agresi Militer II, mereka beranggapan bahwa perlawanan sipil dan komando militer RI otomatis telah hancur sepenuhnya.`,
+              C: `PBB telah mengeluarkan mandat gencatan senjata permanen di Jawa.`,
+              D: `Intelijen Belanda telah menyuap seluruh panglima laskar lokal di Yogyakarta.`,
+              E: `Mereka meyakini TNI kehabisan peluru pasca pertempuran Surabaya.`
+            },
+            a: `B`,
+            p: `Belanda menggunakan logika kolonial konvensional: jika kepala negara ditangkap dan ibu kota diduduki, maka negara itu mati (Agresi Militer II). Mereka lalai bahwa TNI menganut doktrin bahwa "selama rakyat ada, tentara tetap ada" (perang gerilya).`
+          },
+          {
+            id: 100,
+            q: `Kesuksesan Serangan Umum 1 Maret berdampak domino pada posisi diplomasi Indonesia. Terdapat korelasi sebab-akibat yang kuat antara Serangan Umum 1 Maret 1949 dengan Perjanjian Roem-Royen (Mei 1949), yaitu…`,
+            o: {
+              A: `Serangan tersebut membuat militer Belanda takut sehingga menyerahkan kedaulatan langsung tanpa perundingan.`,
+              B: `Peristiwa 1 Maret membuka mata UNCI (PBB) bahwa RI masih utuh, yang berujung pada resolusi tegas PBB yang menekan Belanda agar bersedia duduk di Perundingan Roem-Royen dan mengembalikan RI ke Yogyakarta.`,
+              C: `Dalam Perjanjian Roem-Royen, Indonesia dipaksa membayar ganti rugi atas kerusakan kota Yogyakarta.`,
+              D: `Serangan 1 Maret menjadi alasan PBB membatalkan Perjanjian Roem-Royen yang sedang berjalan.`,
+              E: `Belanda memanfaatkan peristiwa 1 Maret untuk menuduh Indonesia sebagai pihak agresor dalam perjanjian.`
+            },
+            a: `B`,
+            p: `Diplomasi di PBB buntu karena Belanda selalu mengeklaim RI sudah lenyap. Kemenangan SU 1 Maret adalah "bukti hidup" yang dibawa diplomat RI ke PBB. Fakta ini memaksa PBB menekan Belanda untuk menyudahi kebohongan mereka, menghentikan agresi, dan menyepakati Perjanjian Roem-Royen (memulihkan pemerintahan RI).`
+          }
+        ];
+
+        function App() {
+          const [gameState, setGameState] = useState('start'); // start, playing, result
+          const [questions, setQuestions] = useState([]);
+          const [answers, setAnswers] = useState({});
+          const [score, setScore] = useState(0);
+
+          // Fungsi untuk mengacak array (Fisher-Yates Shuffle)
+          const shuffleArray = (array) => {
+            let newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+          };
+
+          const startQuiz = () => {
+            setQuestions(shuffleArray(quizData));
+            setAnswers({});
+            setScore(0);
+            setGameState('playing');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          };
+
+          const handleOptionSelect = (questionId, selectedOption) => {
+            setAnswers({
+              ...answers,
+              [questionId]: selectedOption
+            });
+          };
+
+          const submitQuiz = () => {
+            if (Object.keys(answers).length < questions.length) {
+              if (!window.confirm(`Anda baru menjawab ${Object.keys(answers).length} dari 100 soal. Yakin ingin mengumpulkan sekarang?`)) {
+                return;
+              }
+            }
+
+            let correctCount = 0;
+            questions.forEach((q) => {
+              if (answers[q.id] === q.a) {
+                correctCount++;
+              }
+            });
+
+            const finalScore = Math.round((correctCount / questions.length) * 100);
+            setScore(finalScore);
+            setGameState('result');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          };
+
+          if (gameState === 'start') {
+            return (
+              <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4 font-sans text-gray-800">
+                <div className="max-w-2xl bg-white p-8 md:p-12 rounded-2xl shadow-xl text-center">
+                  <div className="mb-6 inline-flex items-center justify-center w-20 h-20 bg-blue-100 text-blue-600 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                  </div>
+                  <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Quiz Sejarah Kemerdekaan RI</h1>
+                  <p className="text-gray-600 mb-8 text-lg">
+                    Uji pengetahuan Anda mengenai sejarah perjuangan diplomasi dan pertempuran fisik kemerdekaan Indonesia. Terdapat 100 soal pilihan ganda yang urutannya akan diacak secara otomatis.
+                  </p>
+                  <button 
+                    onClick={startQuiz}
+                    className="w-full md:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-lg transition-all shadow-lg hover:shadow-blue-500/30"
+                  >
+                    Mulai Quiz Sekarang
+                  </button>
+                </div>
+              </div>
+            );
+          }
+
+          if (gameState === 'playing') {
+            return (
+              <div className="min-h-screen bg-gray-50 pb-24 font-sans text-gray-800">
+                <header className="bg-white shadow-sm sticky top-0 z-10 px-4 py-4 flex justify-between items-center">
+                  <h2 className="font-bold text-lg md:text-xl text-gray-800">Quiz Sedang Berlangsung</h2>
+                  <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-semibold text-sm">
+                    Terjawab: {Object.keys(answers).length} / 100
+                  </div>
+                </header>
+
+                <main className="max-w-4xl mx-auto p-4 mt-6">
+                  {questions.map((q, index) => (
+                    <div key={q.id} className="bg-white p-6 md:p-8 rounded-xl shadow-sm mb-6 border border-gray-100">
+                      <h3 className="text-lg font-semibold mb-4 whitespace-pre-wrap leading-relaxed">
+                        <span className="text-blue-600 mr-2">{index + 1}.</span>
+                        {q.q}
+                      </h3>
+                      <div className="space-y-3">
+                        {Object.entries(q.o).map(([letter, text]) => {
+                          const isSelected = answers[q.id] === letter;
+                          return (
+                            <label 
+                              key={letter}
+                              className={`flex items-start p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
+                                isSelected ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:bg-gray-50'
+                              }`}
+                            >
+                              <input 
+                                type="radio" 
+                                name={`question-${q.id}`} 
+                                value={letter}
+                                checked={isSelected}
+                                onChange={() => handleOptionSelect(q.id, letter)}
+                                className="mt-1 w-5 h-5 text-blue-600 focus:ring-blue-500"
+                              />
+                              <span className="ml-3 flex-1">
+                                <span className="font-bold mr-2">{letter}.</span> {text}
+                              </span>
+                            </label>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+
+                  <div className="mt-12 text-center">
+                    <button 
+                      onClick={submitQuiz}
+                      className="px-10 py-4 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl text-xl transition-all shadow-lg hover:shadow-green-500/30 w-full md:w-auto"
+                    >
+                      Kumpulkan Jawaban
+                    </button>
+                  </div>
+                </main>
+              </div>
+            );
+          }
+
+          // State: Result
+          return (
+            <div className="min-h-screen bg-gray-50 pb-24 font-sans text-gray-800">
+              <header className="bg-white shadow-sm px-4 py-6 text-center">
+                <h2 className="text-3xl font-bold text-gray-800 mb-2">Hasil Quiz Anda</h2>
+                <div className="inline-block mt-4 bg-gray-100 p-6 rounded-2xl border-2 border-gray-200">
+                  <p className="text-gray-500 text-sm uppercase tracking-wider font-semibold mb-1">Skor Akhir</p>
+                  <p className={`text-6xl font-black ${score >= 70 ? 'text-green-600' : 'text-red-500'}`}>
+                    {score} <span className="text-2xl text-gray-400 font-bold">/ 100</span>
+                  </p>
+                </div>
+              </header>
+
+              <main className="max-w-4xl mx-auto p-4 mt-8">
+                <div className="mb-6 flex justify-between items-center">
+                  <h3 className="text-xl font-bold">Koreksi & Pembahasan</h3>
+                  <button 
+                    onClick={startQuiz}
+                    className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors shadow-md"
+                  >
+                    Ulangi Quiz
+                  </button>
+                </div>
+
+                {questions.map((q, index) => {
+                  const userAnswer = answers[q.id];
+                  const isCorrect = userAnswer === q.a;
+                  const isUnanswered = !userAnswer;
+
+                  return (
+                    <div key={q.id} className="bg-white p-6 md:p-8 rounded-xl shadow-sm mb-6 border border-gray-100">
+                      <div className="flex items-start mb-4">
+                        <div className="flex-shrink-0 mt-1 mr-3">
+                          {isCorrect ? (
+                            <svg className="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            </svg>
+                          ) : (
+                            <svg className="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                            </svg>
+                          )}
+                        </div>
+                        <h3 className="text-lg font-semibold whitespace-pre-wrap leading-relaxed">
+                          <span className="text-gray-500 mr-1">{index + 1}.</span>
+                          {q.q}
+                        </h3>
+                      </div>
+
+                      <div className="space-y-3 ml-9">
+                        {Object.entries(q.o).map(([letter, text]) => {
+                          const isThisOptionCorrect = letter === q.a;
+                          const isThisOptionSelected = letter === userAnswer;
+                          
+                          let optionClass = "border-gray-200 bg-gray-50 opacity-60"; // Default
+                          
+                          if (isThisOptionCorrect) {
+                            optionClass = "border-green-500 bg-green-50 text-green-900 font-medium";
+                          } else if (isThisOptionSelected && !isThisOptionCorrect) {
+                            optionClass = "border-red-500 bg-red-50 text-red-900";
+                          }
+
+                          return (
+                            <div 
+                              key={letter}
+                              className={`flex items-start p-3 rounded-lg border-2 ${optionClass}`}
+                            >
+                              <span className="font-bold mr-3 w-6 text-center">{letter}.</span> 
+                              <span className="flex-1">{text}</span>
+                              
+                              {isThisOptionCorrect && <span className="ml-2 text-green-600 font-bold text-sm">✓ Benar</span>}
+                              {isThisOptionSelected && !isThisOptionCorrect && <span className="ml-2 text-red-600 font-bold text-sm">✗ Jawaban Anda</span>}
+                            </div>
+                          );
+                        })}
+                      </div>
+                      
+                      {isUnanswered && (
+                        <div className="ml-9 mt-3 text-red-500 font-medium text-sm">
+                          ⚠️ Anda tidak menjawab soal ini.
+                        </div>
+                      )}
+
+                      <div className="ml-9 mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                        <h4 className="font-bold text-blue-800 mb-2 flex items-center">
+                          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                          Pembahasan
+                        </h4>
+                        <p className="text-blue-900 whitespace-pre-wrap text-sm leading-relaxed">
+                          {q.p || 'Tidak ada pembahasan spesifik yang diberikan untuk soal ini.'}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+                
+                <div className="mt-8 text-center pb-8">
+                    <button 
+                      onClick={startQuiz}
+                      className="px-8 py-4 bg-gray-800 hover:bg-gray-900 text-white font-bold rounded-xl text-lg transition-all shadow-lg"
+                    >
+                      Kembali ke Beranda / Ulangi Quiz
+                    </button>
+                </div>
+              </main>
+            </div>
+          );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
